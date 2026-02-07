@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot;
 
 import static edu.wpi.first.units.Units.*;
@@ -10,101 +6,166 @@ import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
+
 import com.pathplanner.lib.commands.PathPlannerAuto;
 
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import frc.robot.commands.Limelight.LeftBank;
-import frc.robot.commands.Limelight.RightBank;
 import frc.robot.generated.TunerConstants;
-import frc.robot.subsystems.SwerveSubsystem;
+import frc.robot.subsystems.*;
+import frc.robot.commands.AutoShootCommand;
+import frc.robot.vision.DriveAssistManager;
 
 public class RobotContainer {
-    private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
-    private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
 
-    /* Setting up bindings for necessary control of the swerve drive platform */
-    private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
-            .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
-            .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // Use open-loop control for drive motors
-    private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
-    private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
+    private double MaxSpeed =
+        TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
 
-    private final Telemetry logger = new Telemetry(MaxSpeed);
+    private double MaxAngularRate =
+        RotationsPerSecond.of(0.75).in(RadiansPerSecond);
 
-    private final CommandXboxController joystick = new CommandXboxController(0);
+    private final SwerveRequest.FieldCentric drive =
+        new SwerveRequest.FieldCentric()
+            .withDeadband(MaxSpeed * 0.1)
+            .withRotationalDeadband(MaxAngularRate * 0.1)
+            .withDriveRequestType(
+                DriveRequestType.OpenLoopVoltage);
 
-    public final SwerveSubsystem drivetrain = TunerConstants.createDrivetrain();
-    
-    private SendableChooser<String> autoChooser = new SendableChooser<String>();
-    
-    private ShuffleboardTab tab = Shuffleboard.getTab("Driver");
-    private final CommandXboxController driverXbox = new CommandXboxController(0);
+    private final SwerveRequest.SwerveDriveBrake brake =
+        new SwerveRequest.SwerveDriveBrake();
 
-   
-   
+    private final SwerveRequest.PointWheelsAt point =
+        new SwerveRequest.PointWheelsAt();
+
+    public final SwerveSubsystem drivetrain =
+        TunerConstants.createDrivetrain();
+
+    private final ShooterSubsystem shooter =
+        new ShooterSubsystem();
+
+    private final HopperSubsystem hopper =
+        new HopperSubsystem();
+
+    private final DriveAssistManager driveAssist =
+        new DriveAssistManager(drivetrain);
+
+    private final CommandXboxController driverXbox =
+        new CommandXboxController(0);
+
+    private final CommandXboxController scoringXbox =
+        new CommandXboxController(1);
+
+    private SendableChooser<String> autoChooser =
+        new SendableChooser<>();
 
     public RobotContainer() {
-        configureBindings();
-       
-    
 
-    autoChooser.setDefaultOption("1Algae1CoralCenter", "1Algae1CoralCenter");
-    autoChooser.addOption("1Algae1CoralCenter", "1Algae1CoralCenter");
-    autoChooser.addOption("2PieceProcesor", "2PiecePR");
-    autoChooser.addOption("2PieceOposite", "2PieceOP");
-    autoChooser.addOption("PushBot1Algae1Coral","PushBot1Algae1Coral");
-    tab.add(autoChooser);
+        configureBindings();
+
+        autoChooser.setDefaultOption(
+            "1Algae1CoralCenter",
+            "1Algae1CoralCenter"
+        );
+
+        autoChooser.addOption(
+            "2PieceProcesor",
+            "2PiecePR");
+
+        autoChooser.addOption(
+            "2PieceOposite",
+            "2PieceOP");
+
+        autoChooser.addOption(
+            "PushBot1Algae1Coral",
+            "PushBot1Algae1Coral"
+        );
+
+        Shuffleboard
+            .getTab("Driver")
+            .add(autoChooser);
     }
 
     private void configureBindings() {
-        // Note that X is defined as forward according to WPILib convention,
-        // and Y is defined as to the left according to WPILib convention.
+
         drivetrain.setDefaultCommand(
-            // Drivetrain will execute this command periodically
             drivetrain.applyRequest(() ->
-                drive.withVelocityX(-joystick.getLeftY() * MaxSpeed) // Drive forward with negative Y (forward)
-                    .withVelocityY(-joystick.getLeftX() * MaxSpeed) // Drive left with negative X (left)
-                    .withRotationalRate(-joystick.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
+                drive
+                    .withVelocityX(
+                        -driverXbox.getLeftY() * MaxSpeed)
+                    .withVelocityY(
+                        -driverXbox.getLeftX() * MaxSpeed)
+                    .withRotationalRate(
+                        -driverXbox.getRightX()
+                        * MaxAngularRate)
             )
         );
-    driverXbox.povLeft().whileTrue(new LeftBank(drivetrain));
-    driverXbox.povRight().whileTrue(new RightBank(drivetrain));
-    
-   
-        ;
 
-        // Idle while the robot is disabled. This ensures the configured
-        // neutral mode is applied to the drive motors while disabled.
         final var idle = new SwerveRequest.Idle();
+
         RobotModeTriggers.disabled().whileTrue(
-            drivetrain.applyRequest(() -> idle).ignoringDisable(true)
+            drivetrain.applyRequest(() -> idle)
+                .ignoringDisable(true)
         );
 
-        joystick.a().whileTrue(drivetrain.applyRequest(() -> brake));
-        joystick.b().whileTrue(drivetrain.applyRequest(() ->
-            point.withModuleDirection(new Rotation2d(-joystick.getLeftY(), -joystick.getLeftX()))
-        ));
+        driverXbox.a()
+            .whileTrue(
+                drivetrain.applyRequest(() -> brake));
 
-        // Run SysId routines when holding back/start and X/Y.
-        // Note that each routine should be run exactly once in a single log.
-        joystick.back().and(joystick.y()).whileTrue(drivetrain.sysIdDynamic(Direction.kForward));
-        joystick.back().and(joystick.x()).whileTrue(drivetrain.sysIdDynamic(Direction.kReverse));
-        joystick.start().and(joystick.y()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kForward));
-        joystick.start().and(joystick.x()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
+        driverXbox.b().whileTrue(
+            drivetrain.applyRequest(() ->
+                point.withModuleDirection(
+                    new Rotation2d(
+                        -driverXbox.getLeftY(),
+                        -driverXbox.getLeftX()
+                    )
+                )
+            )
+        );
 
-        // reset the field-centric heading on left bumper press
-        joystick.x().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
+        // ⭐ AUTO SHOOT BUTTON
+        scoringXbox.rightTrigger().whileTrue(
+            new AutoShootCommand(
+                drivetrain,
+                shooter,
+                hopper,
+                driveAssist,
+                () -> driverXbox.getLeftY(),
+                () -> driverXbox.getLeftX()
+            )
+        );
 
-        drivetrain.registerTelemetry(logger::telemeterize);
+        driverXbox.back().and(driverXbox.y())
+            .whileTrue(
+                drivetrain.sysIdDynamic(
+                    Direction.kForward));
+
+        driverXbox.back().and(driverXbox.x())
+            .whileTrue(
+                drivetrain.sysIdDynamic(
+                    Direction.kReverse));
+
+        driverXbox.start().and(driverXbox.y())
+            .whileTrue(
+                drivetrain.sysIdQuasistatic(
+                    Direction.kForward));
+
+        driverXbox.start().and(driverXbox.x())
+            .whileTrue(
+                drivetrain.sysIdQuasistatic(
+                    Direction.kReverse));
+
+        driverXbox.x().onTrue(
+            drivetrain.runOnce(() ->
+                drivetrain.seedFieldCentric())
+        );
     }
 
     public Command getAutonomousCommand() {
-        return new PathPlannerAuto(autoChooser.getSelected());
-  }
+        return new PathPlannerAuto(
+            autoChooser.getSelected());
+    }
 }
