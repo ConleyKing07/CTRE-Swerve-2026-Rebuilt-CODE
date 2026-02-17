@@ -10,18 +10,22 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class HopperSubsystem extends SubsystemBase {
 
     private final SparkMax hopperMotor;
+   
 
     // Default speeds (adjust to your robot)
-    private static final double FEED_SPEED = 0.8;  // toward shooter
+    private static final double FEED_SPEED = 1.0;  // toward shooter
     private static final double REVERSE_SPEED = -0.5; // out / clear jam
 
+
     public HopperSubsystem() {
-        final  SparkMaxConfig Config = new SparkMaxConfig();
-        hopperMotor = new SparkMax(3, MotorType.kBrushless);
-        Config.inverted(false);
-        Config.smartCurrentLimit(20);
-        hopperMotor.configure(Config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+       
+        final SparkMaxConfig config = new SparkMaxConfig();
+        hopperMotor = new SparkMax(23, MotorType.kBrushless);
+        config.inverted(true);
+        config.smartCurrentLimit(40);
+        hopperMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
+
     
 
     /** Feed balls toward shooter at default speed */
@@ -43,4 +47,7 @@ public class HopperSubsystem extends SubsystemBase {
     public void feed(double speed) {
         hopperMotor.set(speed);
     }
-}
+
+    
+    }
+

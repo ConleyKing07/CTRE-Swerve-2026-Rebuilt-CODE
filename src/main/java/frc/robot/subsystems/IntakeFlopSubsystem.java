@@ -10,9 +10,6 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
-import com.ctre.phoenix6.hardware.CANrange;
-
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class IntakeFlopSubsystem extends SubsystemBase {
@@ -21,38 +18,30 @@ public class IntakeFlopSubsystem extends SubsystemBase {
     private final RelativeEncoder armEncoder;
     private final SparkClosedLoopController armPID;
 
-    private final CANrange hopperSensor =
-        new CANrange(10);
-
     private static final double STOW_POSITION = 0.0;
-    private static final double DEPLOY_POSITION = 4.25;
+    private static final double DEPLOY_POSITION = 5.0;
 
-    /* ==== TUNE THIS ==== */
-    private static final double Full_DISTANCE_METERS =
-        0.25; // when hopper empty
+    private static final double POSITION_TOLERANCE = 0.2;
+    private static final double STOW_HOLD_OUTPUT = -0.1;
 
-    private static final double POST_FOLD_DELAY =
-        1.5;
+    private boolean clampActive = false;
+    private boolean movingToStow = false;
 
-    private boolean autoFoldActive=false;
-    private double foldTime=0;
-    private boolean manualDeploy=false;
+    public IntakeFlopSubsystem() {
 
-    public IntakeFlopSubsystem(){
+        armMotor = new SparkMax(22, MotorType.kBrushless);
+        armEncoder = armMotor.getEncoder();
+        armPID = armMotor.getClosedLoopController();
 
-        armMotor=new SparkMax(2,MotorType.kBrushless);
-        armEncoder=armMotor.getEncoder();
-        armPID=armMotor.getClosedLoopController();
-
-        SparkMaxConfig config=new SparkMaxConfig();
+        SparkMaxConfig config = new SparkMaxConfig();
         config.idleMode(IdleMode.kBrake);
-        config.smartCurrentLimit(40);
+        config.smartCurrentLimit(50);
 
         config.closedLoop
-            .p(2.2)
-            .i(0)
-            .d(0.15)
-            .outputRange(-0.6,0.6);
+            .p(0.75)
+            .i(0.0)
+            .d(0.3)
+            .outputRange(-2.5, 0.15);
 
         armMotor.configure(
             config,
@@ -62,54 +51,60 @@ public class IntakeFlopSubsystem extends SubsystemBase {
         armEncoder.setPosition(0);
     }
 
-    public void requestDeploy(boolean deploy){
-        manualDeploy=deploy;
-    }
+    // =========================
+    // COMMAND API
+    // =========================
 
-    private void deploy(){
+    public void deploy() {
+        clampActive = false;
+        movingToStow = false;
+
         armPID.setSetpoint(
             DEPLOY_POSITION,
             ControlType.kPosition);
     }
 
-    private void stow(){
+    public void stow() {
+        clampActive = false;
+        movingToStow = true;
+
         armPID.setSetpoint(
             STOW_POSITION,
             ControlType.kPosition);
     }
 
-    private double getDistance(){
-        return hopperSensor
-            .getDistance()
-            .getValueAsDouble();
+    public void stop() {
+        armMotor.stopMotor();
     }
 
+    public boolean isDeployed() {
+        return Math.abs(
+            armEncoder.getPosition() - DEPLOY_POSITION
+        ) < POSITION_TOLERANCE;
+    }
+
+    public boolean isStowed() {
+        return Math.abs(
+            armEncoder.getPosition() - STOW_POSITION
+        ) < POSITION_TOLERANCE;
+    }
+
+    // =========================
+    // PERIODIC
+    // =========================
+
     @Override
-    public void periodic(){
+    public void periodic() {
 
-        double dist=getDistance();
-
-        if(dist>Full_DISTANCE_METERS
-            && !autoFoldActive){
-
-            autoFoldActive=true;
-            foldTime=Timer.getFPGATimestamp();
-            stow();
+        // When moving to stow and we reach position
+        if (movingToStow && isStowed()) {
+            clampActive = true;
+            movingToStow = false;
         }
 
-        if(autoFoldActive){
-
-            if(Timer.getFPGATimestamp()
-                -foldTime>POST_FOLD_DELAY){
-
-                autoFoldActive=false;
-            }
-
-            return;
-        }
-
-        if(manualDeploy){
-            deploy();
+        // Apply clamp hold ONLY after stow completed
+        if (clampActive) {
+            armMotor.set(STOW_HOLD_OUTPUT);
         }
     }
 }

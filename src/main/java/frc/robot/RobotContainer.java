@@ -9,163 +9,141 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
-import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
-
 import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.*;
-import frc.robot.commands.AutoShootCommand;
+import frc.robot.commands.*;
 import frc.robot.vision.DriveAssistManager;
 
 public class RobotContainer {
 
-    private double MaxSpeed =
-        TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
+    // ---------------- Speed limits ----------------
+    private final double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
+    private final double MaxAngularRate = RotationsPerSecond.of(1.25).in(RadiansPerSecond);
 
-    private double MaxAngularRate =
-        RotationsPerSecond.of(0.75).in(RadiansPerSecond);
+    // ---------------- Subsystems ----------------
+    public final SwerveSubsystem drivetrain = TunerConstants.createDrivetrain();
+    public final IntakeSubsystem intake = new IntakeSubsystem();
+    private final ShooterSubsystem shooter = new ShooterSubsystem();
+    private final PreShooterSubsystem preshooter = new PreShooterSubsystem();
+    private final HopperSubsystem hopper = new HopperSubsystem();
+    private final IntakeFlopSubsystem intakeFlop = new IntakeFlopSubsystem();
+    private final DriveAssistManager driveAssist = new DriveAssistManager(drivetrain);
 
-    private final SwerveRequest.FieldCentric drive =
-        new SwerveRequest.FieldCentric()
+    // ---------------- Controllers ----------------
+    private final CommandXboxController driverXbox = new CommandXboxController(0);
+    private final CommandXboxController scoringXbox = new CommandXboxController(1);
+
+    // ---------------- Commands ----------------
+    private final ArmCommand armShoot = new ArmCommand(
+            drivetrain,
+            shooter,
+            preshooter,
+            driveAssist,
+            () -> driverXbox.getLeftY(),
+            () -> driverXbox.getLeftX()
+    );
+
+    private final FireCommand fire = new FireCommand(hopper);
+
+    private final SendableChooser<String> autoChooser = new SendableChooser<>();
+
+    // ---------------- Drive requests ----------------
+    private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
             .withDeadband(MaxSpeed * 0.1)
             .withRotationalDeadband(MaxAngularRate * 0.1)
-            .withDriveRequestType(
-                DriveRequestType.OpenLoopVoltage);
+            .withDriveRequestType(DriveRequestType.Velocity);
 
-    private final SwerveRequest.SwerveDriveBrake brake =
-        new SwerveRequest.SwerveDriveBrake();
+    private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
+    private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
 
-    private final SwerveRequest.PointWheelsAt point =
-        new SwerveRequest.PointWheelsAt();
+    // ---------------- Speed boost ----------------
+    private boolean speedBoost = false;
+    private static final double kNormalSpeedScale = 0.6;
+    private static final double kBoostSpeedScale = 1.0;
 
-    public final SwerveSubsystem drivetrain =
-        TunerConstants.createDrivetrain();
-
-    private final ShooterSubsystem shooter =
-        new ShooterSubsystem();
-
-    private final HopperSubsystem hopper =
-        new HopperSubsystem();
-
-    private final DriveAssistManager driveAssist =
-        new DriveAssistManager(drivetrain);
-
-    private final CommandXboxController driverXbox =
-        new CommandXboxController(0);
-
-    private final CommandXboxController scoringXbox =
-        new CommandXboxController(1);
-
-    private SendableChooser<String> autoChooser =
-        new SendableChooser<>();
-
+    // ---------------- Constructor ----------------
     public RobotContainer() {
-
         configureBindings();
 
-        autoChooser.setDefaultOption(
-            "1Algae1CoralCenter",
-            "1Algae1CoralCenter"
-        );
+        autoChooser.setDefaultOption("1Algae1CoralCenter", "1Algae1CoralCenter");
+        autoChooser.addOption("2PieceProcesor", "2PiecePR");
+        autoChooser.addOption("2PieceOposite", "2PieceOP");
+        autoChooser.addOption("PushBot1Algae1Coral", "PushBot1Algae1Coral");
 
-        autoChooser.addOption(
-            "2PieceProcesor",
-            "2PiecePR");
-
-        autoChooser.addOption(
-            "2PieceOposite",
-            "2PieceOP");
-
-        autoChooser.addOption(
-            "PushBot1Algae1Coral",
-            "PushBot1Algae1Coral"
-        );
-
-        Shuffleboard
-            .getTab("Driver")
-            .add(autoChooser);
+        Shuffleboard.getTab("Driver").add(autoChooser);
     }
 
+    // ---------------- Bindings ----------------
     private void configureBindings() {
 
+        // ---------------- Speed boost toggle ----------------
+        driverXbox.rightBumper().whileTrue(new InstantCommand(() -> speedBoost = true))
+                                .onFalse(new InstantCommand(() -> speedBoost = false));
+
+        // ---------------- Default drive command ----------------
         drivetrain.setDefaultCommand(
-            drivetrain.applyRequest(() ->
-                drive
-                    .withVelocityX(
-                        -driverXbox.getLeftY() * MaxSpeed)
-                    .withVelocityY(
-                        -driverXbox.getLeftX() * MaxSpeed)
-                    .withRotationalRate(
-                        -driverXbox.getRightX()
-                        * MaxAngularRate)
-            )
+            drivetrain.applyRequest(() -> {
+                double speedScale = speedBoost ? kBoostSpeedScale : kNormalSpeedScale;
+
+                double vx = -driverXbox.getLeftY() * MaxSpeed * speedScale;
+                double vy = -driverXbox.getLeftX() * MaxSpeed * speedScale;
+                double rot = -driverXbox.getRightX() * MaxAngularRate * speedScale;
+
+                // Heading-hold when right stick is near zero
+                if (Math.abs(driverXbox.getRightX()) < 0.05) {
+                    if (!drivetrain.headingHoldEnabled) drivetrain.enableHeadingHold();
+                    double error = drivetrain.getPose().getRotation()
+                                    .minus(drivetrain.targetHeading)
+                                    .getRadians();
+                    rot += SwerveSubsystem.kP_heading * error;
+                } else {
+                    drivetrain.disableHeadingHold();
+                }
+
+                return drive.withVelocityX(vx)
+                            .withVelocityY(vy)
+                            .withRotationalRate(rot);
+            })
         );
 
         final var idle = new SwerveRequest.Idle();
 
-        RobotModeTriggers.disabled().whileTrue(
-            drivetrain.applyRequest(() -> idle)
-                .ignoringDisable(true)
-        );
+        // ---------------- Disabled idle ----------------
+        RobotModeTriggers.disabled()
+            .whileTrue(drivetrain.applyRequest(() -> idle).ignoringDisable(true));
 
-        driverXbox.a()
-            .whileTrue(
-                drivetrain.applyRequest(() -> brake));
+        // ---------------- Intake ----------------
+        new Trigger(() -> scoringXbox.getRightTriggerAxis() > 0.1)
+            .whileTrue(new Intake(intake, 0.75));
+        new Trigger(() -> scoringXbox.getLeftTriggerAxis() > 0.1)
+            .whileTrue(new Outtake(intake, 0.3));
+        scoringXbox.a().onTrue(new IntakeDeploy(intakeFlop));
+        scoringXbox.b().onTrue(new IntakeRetract(intakeFlop));
 
-        driverXbox.b().whileTrue(
-            drivetrain.applyRequest(() ->
-                point.withModuleDirection(
-                    new Rotation2d(
-                        -driverXbox.getLeftY(),
-                        -driverXbox.getLeftX()
-                    )
-                )
+        // ---------------- Shooting ----------------
+        scoringXbox.leftBumper().whileTrue(armShoot);
+        scoringXbox.rightBumper().whileTrue(fire);
+
+        // ---------------- Driver utilities ----------------
+        driverXbox.a().whileTrue(drivetrain.applyRequest(() -> brake));
+        driverXbox.b().whileTrue(drivetrain.applyRequest(() ->
+            point.withModuleDirection(
+                new Rotation2d(-driverXbox.getLeftY(), -driverXbox.getLeftX())
             )
-        );
+        ));
+        driverXbox.x().onTrue(drivetrain.runOnce(drivetrain::seedFieldCentric));
 
-        // ⭐ AUTO SHOOT BUTTON
-        scoringXbox.rightTrigger().whileTrue(
-            new AutoShootCommand(
-                drivetrain,
-                shooter,
-                hopper,
-                driveAssist,
-                () -> driverXbox.getLeftY(),
-                () -> driverXbox.getLeftX()
-            )
-        );
-
-        driverXbox.back().and(driverXbox.y())
-            .whileTrue(
-                drivetrain.sysIdDynamic(
-                    Direction.kForward));
-
-        driverXbox.back().and(driverXbox.x())
-            .whileTrue(
-                drivetrain.sysIdDynamic(
-                    Direction.kReverse));
-
-        driverXbox.start().and(driverXbox.y())
-            .whileTrue(
-                drivetrain.sysIdQuasistatic(
-                    Direction.kForward));
-
-        driverXbox.start().and(driverXbox.x())
-            .whileTrue(
-                drivetrain.sysIdQuasistatic(
-                    Direction.kReverse));
-
-        driverXbox.x().onTrue(
-            drivetrain.runOnce(() ->
-                drivetrain.seedFieldCentric())
-        );
+    
     }
 
+    // ---------------- Autonomous ----------------
     public Command getAutonomousCommand() {
-        return new PathPlannerAuto(
-            autoChooser.getSelected());
+        return new PathPlannerAuto(autoChooser.getSelected());
     }
 }

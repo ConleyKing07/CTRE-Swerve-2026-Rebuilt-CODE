@@ -8,7 +8,6 @@ import com.ctre.phoenix6.hardware.*;
 import com.ctre.phoenix6.signals.*;
 import com.ctre.phoenix6.swerve.*;
 import com.ctre.phoenix6.swerve.SwerveModuleConstants.*;
-
 import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
@@ -25,12 +24,12 @@ public class TunerConstants {
     // output type specified by SwerveModuleConstants.SteerMotorClosedLoopOutput
     // --- REDUCED-AGGRESSION GAINS (safe defaults to avoid chatter) ---
     private static final Slot0Configs steerGains = new Slot0Configs()
-        .withKP(20)   // much lower than 100: start conservative
+        .withKP(50)
         .withKI(0.0)
-        .withKD(1.0)    // damping to reduce oscillation
-        .withKS(0.1)    // keep small static FF to overcome stiction
-        .withKV(1.08)
-        .withKA(0)
+        .withKD(2.0)
+        .withKS(0.05)
+        .withKV(0.8)
+        .withKA(0.0)
         .withStaticFeedforwardSign(StaticFeedforwardSignValue.UseClosedLoopSign);
 
     // When using closed-loop control, the drive motor uses the control
@@ -57,7 +56,7 @@ public class TunerConstants {
 
     // The stator current at which the wheels start to slip;
     // This needs to be tuned to your individual robot
-    private static final Current kSlipCurrent = Amps.of(30.0);
+    private static final Current kSlipCurrent = Amps.of(40.0);
 
     // Initial configs for the drive and steer motors and the azimuth encoder; these cannot be null.
     // Some configs will be overwritten; check the `with*InitialConfigs()` API documentation.
@@ -66,7 +65,7 @@ public class TunerConstants {
     // --- ADDED: Closed-loop ramp + continuous wrap for steer to prevent jitter/flip ---
     private static final ClosedLoopRampsConfigs steerClosedLoopRamps = new ClosedLoopRampsConfigs()
         // short ramp to smooth closed-loop output transitions (50 ms)
-        .withVoltageClosedLoopRampPeriod(0.05);
+        .withVoltageClosedLoopRampPeriod(0.08);
 
     private static final ClosedLoopGeneralConfigs steerClosedLoopGeneral = new ClosedLoopGeneralConfigs()
         // enable continuous wrap so azimuth takes the shortest path
@@ -77,7 +76,7 @@ public class TunerConstants {
             new CurrentLimitsConfigs()
                 // Swerve azimuth does not require much torque output, so we can set a relatively low
                 // stator current limit to help avoid brownouts without impacting performance.
-                .withStatorCurrentLimit(Amps.of(120))
+                .withStatorCurrentLimit(Amps.of(40))
                 .withStatorCurrentLimitEnable(true)
         )
         .withClosedLoopRamps(steerClosedLoopRamps)
@@ -97,7 +96,7 @@ public class TunerConstants {
 
     // Every 1 rotation of the azimuth results in kCoupleRatio drive motor turns;
     // This may need to be tuned to your individual robot
-    private static final double kCoupleRatio = 2.8333333333333335;
+    private static final double kCoupleRatio = 2.8333333333333;
 
     private static final double kDriveGearRatio = 5.464285714285715;
     private static final double kSteerGearRatio = 11.314285714285715;
@@ -148,11 +147,11 @@ public class TunerConstants {
     private static final int kFrontLeftDriveMotorId = 6;
     private static final int kFrontLeftSteerMotorId = 2;
     private static final int kFrontLeftEncoderId = 10;
-    private static final Angle kFrontLeftEncoderOffset = Rotations.of(0.344482421875);
+    private static final Angle kFrontLeftEncoderOffset = Rotations.of(0.34423828125);
     private static final boolean kFrontLeftSteerMotorInverted = true;
     private static final boolean kFrontLeftEncoderInverted = false;
 
-    private static final Distance kFrontLeftXPos = Inches.of(7.375);
+    private static final Distance kFrontLeftXPos = Inches.of(4.375);
     private static final Distance kFrontLeftYPos = Inches.of(10.375);
 
     // Front Right
@@ -163,29 +162,29 @@ public class TunerConstants {
     private static final boolean kFrontRightSteerMotorInverted = true;
     private static final boolean kFrontRightEncoderInverted = false;
 
-    private static final Distance kFrontRightXPos = Inches.of(7.375);
+    private static final Distance kFrontRightXPos = Inches.of(4.375);
     private static final Distance kFrontRightYPos = Inches.of(-10.375);
 
     // Back Left
     private static final int kBackLeftDriveMotorId = 7;
     private static final int kBackLeftSteerMotorId = 3;
     private static final int kBackLeftEncoderId = 11;
-    private static final Angle kBackLeftEncoderOffset = Rotations.of(-0.011474609375);
+    private static final Angle kBackLeftEncoderOffset = Rotations.of(-0.01123046875);
     private static final boolean kBackLeftSteerMotorInverted = true;
     private static final boolean kBackLeftEncoderInverted = false;
 
-    private static final Distance kBackLeftXPos = Inches.of(-7.375);
+    private static final Distance kBackLeftXPos = Inches.of(-10.375);
     private static final Distance kBackLeftYPos = Inches.of(10.375);
 
     // Back Right
     private static final int kBackRightDriveMotorId = 8;
     private static final int kBackRightSteerMotorId = 4;
     private static final int kBackRightEncoderId = 12;
-    private static final Angle kBackRightEncoderOffset = Rotations.of(-0.4521484375);
+    private static final Angle kBackRightEncoderOffset = Rotations.of(-0.451904296875);
     private static final boolean kBackRightSteerMotorInverted = true;
     private static final boolean kBackRightEncoderInverted = false;
 
-    private static final Distance kBackRightXPos = Inches.of(-7.375);
+    private static final Distance kBackRightXPos = Inches.of(-10.375);
     private static final Distance kBackRightYPos = Inches.of(-10.375);
 
 

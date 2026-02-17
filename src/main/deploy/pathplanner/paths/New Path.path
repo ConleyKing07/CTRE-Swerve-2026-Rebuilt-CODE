@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.8235131072033717,
-        "y": 0.4426466311823265
+        "x": 3.739171856699058,
+        "y": 0.36968129340885636
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.3449220781572624,
-        "y": 0.49309453300971073
+        "x": 1.8338253222975411,
+        "y": 0.48471578131227555
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 0.7785164051403926,
-        "y": 0.6644793152671538
+        "x": 0.6992915572325704,
+        "y": 0.6382832753349488
       },
       "prevControl": {
-        "x": 2.610016524178757,
-        "y": 0.9544078509342178
+        "x": 2.320977328332673,
+        "y": 1.1844443493789756
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,12 +30,12 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.08919202518363398,
-      "rotationDegrees": 0.0
+      "waypointRelativePos": 0.24239244491081843,
+      "rotationDegrees": 54.695169023245654
     },
     {
-      "waypointRelativePos": 0.5,
-      "rotationDegrees": 59.338221529892635
+      "waypointRelativePos": 0.4606505771248685,
+      "rotationDegrees": 0.0
     }
   ],
   "constraintZones": [],
@@ -57,7 +57,7 @@
   "folder": "Rebuilt Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": 90.0
   },
   "useDefaultConstraints": true
 }
