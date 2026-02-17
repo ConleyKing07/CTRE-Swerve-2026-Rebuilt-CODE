@@ -71,7 +71,7 @@ public class RobotContainer {
     public RobotContainer() {
         configureBindings();
 
-        autoChooser.setDefaultOption("New Auto", "New Auto");
+        autoChooser.setDefaultOption("NewAuto", "NewAuto");
         autoChooser.addOption("2PieceProcesor", "2PiecePR");
         autoChooser.addOption("2PieceOposite", "2PieceOP");
         autoChooser.addOption("PushBot1Algae1Coral", "PushBot1Algae1Coral");
