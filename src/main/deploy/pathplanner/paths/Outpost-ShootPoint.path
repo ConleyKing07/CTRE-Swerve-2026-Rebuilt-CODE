@@ -1,0 +1,54 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 0.7063312391871133,
+        "y": 0.6139594321269488
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 1.806166641221868,
+        "y": 0.6204865204960001
+      },
+      "isLocked": false,
+      "linkedName": "OutpostDump"
+    },
+    {
+      "anchor": {
+        "x": 2.8156866856615914,
+        "y": 2.3604569496685146
+      },
+      "prevControl": {
+        "x": 2.3216047475216595,
+        "y": 2.043472731314798
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "ShootPoint1"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 5.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 400.0,
+    "maxAngularAcceleration": 1500.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -139.55836362490203
+  },
+  "reversed": false,
+  "folder": "Rebuilt Paths",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 180.0
+  },
+  "useDefaultConstraints": true
+}

@@ -11,7 +11,7 @@ public class DriveAssistManager {
 
     // ======== Field / Hub Settings ========
     private static final Pose2d BLUE_HUB =
-        new Pose2d(4.6482, 4.0, new Rotation2d(0));
+        new Pose2d(4.623, 4.033, new Rotation2d(0));
 //X+ -> RED SIDE  Y+ -> LEFT FROM BLUE PERS.
     private static final double FIELD_LENGTH = 16.54;
 
@@ -23,7 +23,7 @@ public class DriveAssistManager {
     private static final double LEAD_TIME = 0.5; // seconds for predictive aiming
 
     // ======== Aim Settings ========
-    private static final double AIM_TOLERANCE_DEG = 0.5; // degrees
+    private static final double AIM_TOLERANCE_DEG = 0.25; // degrees
 
     public DriveAssistManager(SwerveSubsystem s) {
         this.swerve = s;

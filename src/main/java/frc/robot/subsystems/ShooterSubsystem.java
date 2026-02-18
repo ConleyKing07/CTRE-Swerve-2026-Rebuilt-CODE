@@ -18,7 +18,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
     private final VelocityVoltage velocityRequest = new VelocityVoltage(0);
 
-    private static final double RPM_TOLERANCE = 50.0;
+    private static final double RPM_TOLERANCE = 25.0;
 
     private boolean armed = false;
     private double currentTargetRPM = 0;
@@ -35,7 +35,7 @@ public class ShooterSubsystem extends SubsystemBase {
         cfg.CurrentLimits.SupplyCurrentLimitEnable = true;
         cfg.CurrentLimits.SupplyCurrentLimit = 20;
 
-        cfg.Slot0.kP = 0.5;
+        cfg.Slot0.kP = 0.75;
         cfg.Slot0.kV = 0.12;
         cfg.Slot0.kS = 0.05;
 

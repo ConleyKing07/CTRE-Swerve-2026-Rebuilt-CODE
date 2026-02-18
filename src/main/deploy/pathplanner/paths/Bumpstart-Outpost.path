@@ -3,45 +3,34 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.622028469750891,
-        "y": 1.9423368920521953
+        "x": 3.623461788889479,
+        "y": 2.0195071941436935
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.9489350850581573,
-        "y": 1.2712367658854473
+        "x": 2.642744888125171,
+        "y": 2.3304196172464504
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "OutsideBumpOutpostSide"
     },
     {
       "anchor": {
-        "x": 0.5341399762752084,
-        "y": 0.6404744958481603
+        "x": 0.7063312391871133,
+        "y": 0.6139594321269488
       },
       "prevControl": {
-        "x": 2.8301252834205264,
-        "y": 1.9454114135128011
+        "x": 1.450000395782952,
+        "y": 0.5229716011615523
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "OutpostDump"
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "pointTowardsZones": [
-    {
-      "fieldPosition": {
-        "x": 4.65,
-        "y": 4.05
-      },
-      "rotationOffset": 180.0,
-      "minWaypointRelativePos": 0.09471191791633701,
-      "maxWaypointRelativePos": 0.7845303867403343,
-      "name": "Point Towards Zone"
-    }
-  ],
+  "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 5.0,
