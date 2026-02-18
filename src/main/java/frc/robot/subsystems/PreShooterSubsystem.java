@@ -14,7 +14,7 @@ public class PreShooterSubsystem extends SubsystemBase {
 
     private final VelocityVoltage velocityRequest = new VelocityVoltage(0);
 
-    private static final double RPM_RATIO = 1.15;
+    private static final double RPM_RATIO = 1.25;
     private static final double RPM_TOLERANCE = 25.0;
 
     private double targetRPM = 0;
@@ -31,7 +31,7 @@ public class PreShooterSubsystem extends SubsystemBase {
         cfg.CurrentLimits.SupplyCurrentLimitEnable = true;
         cfg.CurrentLimits.SupplyCurrentLimit = 20;
 
-        cfg.Slot0.kP = 0.5;
+        cfg.Slot0.kP = 0.25;
         cfg.Slot0.kV = 0.12;
         cfg.Slot0.kS = 0.05;
 

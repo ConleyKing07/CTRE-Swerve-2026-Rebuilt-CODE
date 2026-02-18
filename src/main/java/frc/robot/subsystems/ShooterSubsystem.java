@@ -35,7 +35,7 @@ public class ShooterSubsystem extends SubsystemBase {
         cfg.CurrentLimits.SupplyCurrentLimitEnable = true;
         cfg.CurrentLimits.SupplyCurrentLimit = 20;
 
-        cfg.Slot0.kP = 0.75;
+        cfg.Slot0.kP = 0.4;
         cfg.Slot0.kV = 0.12;
         cfg.Slot0.kS = 0.05;
 

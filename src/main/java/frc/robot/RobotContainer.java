@@ -120,7 +120,7 @@ public class RobotContainer {
 
         // ---------------- Intake ----------------
         new Trigger(() -> scoringXbox.getRightTriggerAxis() > 0.1)
-            .whileTrue(new Intake(intake, 0.75));
+            .whileTrue(new Intake(intake, 0.95));
         new Trigger(() -> scoringXbox.getLeftTriggerAxis() > 0.1)
             .whileTrue(new Outtake(intake, 0.3));
         scoringXbox.a().onTrue(new IntakeDeploy(intakeFlop));

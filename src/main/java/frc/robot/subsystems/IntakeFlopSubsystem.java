@@ -19,7 +19,7 @@ public class IntakeFlopSubsystem extends SubsystemBase {
     private final SparkClosedLoopController armPID;
 
     private static final double STOW_POSITION = 0.0;
-    private static final double DEPLOY_POSITION = 5.0;
+    private static final double DEPLOY_POSITION = 14;
 
     private static final double POSITION_TOLERANCE = 0.2;
     private static final double STOW_HOLD_OUTPUT = -0.1;
@@ -38,10 +38,10 @@ public class IntakeFlopSubsystem extends SubsystemBase {
         config.smartCurrentLimit(50);
 
         config.closedLoop
-            .p(0.75)
+            .p(0.65)
             .i(0.0)
             .d(0.3)
-            .outputRange(-2.5, 0.15);
+            .outputRange(-0.3, 0.2);
 
         armMotor.configure(
             config,
