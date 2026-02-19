@@ -14,6 +14,7 @@ import frc.robot.Telemetry;
 import frc.robot.LimelightHelpers;
 import frc.robot.generated.TunerConstants;
 import frc.robot.generated.TunerConstants.TunerSwerveDrivetrain;
+import frc.robot.vision.DriveAssistManager;
 
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -27,6 +28,9 @@ import edu.wpi.first.wpilibj2.command.*;
 
 public class SwerveSubsystem extends TunerSwerveDrivetrain implements Subsystem {
 
+    // ================= DRIVE ASSIST =================
+    private final DriveAssistManager driveAssist;
+
     // ================= HEADING HOLD =================
     public Rotation2d targetHeading = Rotation2d.kZero;
     public boolean headingHoldEnabled = false;
@@ -37,6 +41,19 @@ public class SwerveSubsystem extends TunerSwerveDrivetrain implements Subsystem 
     private static final double MAX_VISION_AMBIGUITY = 0.7;
     private double lastVisionTimestamp = -1;
 
+    // ================= FIELD VIS =================
+    private final Field2d field = new Field2d();
+
+    private final Telemetry telemetry =
+        new Telemetry(
+            TunerConstants.kSpeedAt12Volts
+                .in(edu.wpi.first.units.Units.MetersPerSecond)
+        );
+
+    // ================= ALLIANCE PERSPECTIVE =================
+    private boolean perspectiveApplied = false;
+    private static final Rotation2d kBlueForward = Rotation2d.kZero;
+    private static final Rotation2d kRedForward = Rotation2d.k180deg;
 
     // ================= SIM =================
     private Notifier simNotifier;
@@ -53,20 +70,6 @@ public class SwerveSubsystem extends TunerSwerveDrivetrain implements Subsystem 
         simNotifier.startPeriodic(0.02);
     }
 
-    // ================= FIELD VIS =================
-    private final Field2d field = new Field2d();
-
-    private final Telemetry telemetry =
-        new Telemetry(
-            TunerConstants.kSpeedAt12Volts
-                .in(edu.wpi.first.units.Units.MetersPerSecond)
-        );
-
-    // ================= ALLIANCE PERSPECTIVE =================
-    private boolean perspectiveApplied = false;
-    private static final Rotation2d kBlueForward = Rotation2d.kZero;
-    private static final Rotation2d kRedForward = Rotation2d.k180deg;
-
     // ================= CONSTRUCTOR =================
     public SwerveSubsystem(
         SwerveDrivetrainConstants constants,
@@ -74,22 +77,19 @@ public class SwerveSubsystem extends TunerSwerveDrivetrain implements Subsystem 
     ) {
         super(constants, modules);
 
-        for (var module : getModules()){
-        module.getDriveMotor().getPosition().setUpdateFrequency(150);
-        module.getDriveMotor().getVelocity().setUpdateFrequency(100);
-        module.getDriveMotor().getMotorVoltage().setUpdateFrequency(10);
-        module.getDriveMotor().getStatorCurrent().setUpdateFrequency(10);
-        module.getDriveMotor().getSupplyCurrent().setUpdateFrequency(10);
+        driveAssist = new DriveAssistManager(this);
 
-        module.getSteerMotor().getPosition().setUpdateFrequency(150);
-        module.getSteerMotor().getVelocity().setUpdateFrequency(100);
-        module.getSteerMotor().getMotorVoltage().setUpdateFrequency(10);
-        module.getSteerMotor().getStatorCurrent().setUpdateFrequency(10);
-        module.getSteerMotor().getSupplyCurrent().setUpdateFrequency(10);
+        for (var module : getModules()) {
+            module.getDriveMotor().getPosition().setUpdateFrequency(150);
+            module.getDriveMotor().getVelocity().setUpdateFrequency(100);
 
-        getPigeon2().getYaw().setUpdateFrequency(150);
-        getPigeon2().getAngularVelocityZWorld().setUpdateFrequency(150);
+            module.getSteerMotor().getPosition().setUpdateFrequency(150);
+            module.getSteerMotor().getVelocity().setUpdateFrequency(100);
+
+            getPigeon2().getYaw().setUpdateFrequency(150);
+            getPigeon2().getAngularVelocityZWorld().setUpdateFrequency(150);
         }
+
         SmartDashboard.putData("Field", field);
 
         setVisionMeasurementStdDevs(
@@ -151,75 +151,68 @@ public class SwerveSubsystem extends TunerSwerveDrivetrain implements Subsystem 
     }
 
     private void driveRobotRelative(ChassisSpeeds speeds) {
-
-    setControl(
-        new SwerveRequest.RobotCentric()
-            .withVelocityX(speeds.vxMetersPerSecond)
-            .withVelocityY(speeds.vyMetersPerSecond)
-            .withRotationalRate(speeds.omegaRadiansPerSecond)
-    );
-     }
+        setControl(
+            new SwerveRequest.RobotCentric()
+                .withVelocityX(speeds.vxMetersPerSecond)
+                .withVelocityY(speeds.vyMetersPerSecond)
+                .withRotationalRate(speeds.omegaRadiansPerSecond)
+        );
+    }
 
     // ================= PATHPLANNER =================
-   private void configureAutoBuilder() {
-
-    try {
-
-        AutoBuilder.configure(
-            this::getPose,
-            this::resetPose,
-            this::getChassisSpeeds,
-            this::driveRobotRelative,
-            new PPHolonomicDriveController(
-                new PIDConstants(0.08, 0.0, 0.0),
-                new PIDConstants(0.00, 0.0, 0.0)
-            ),
-            RobotConfig.fromGUISettings(),  // ← Must be inside try
-            () -> DriverStation.getAlliance()
-                    .map(a -> a == DriverStation.Alliance.Red)
-                    .orElse(false),
-            this
-        );
-
-    } catch (Exception e) {
-        System.out.println("PathPlanner config failed to load!");
-        e.printStackTrace();
+    private void configureAutoBuilder() {
+        try {
+            AutoBuilder.configure(
+                this::getPose,
+                this::resetPose,
+                this::getChassisSpeeds,
+                this::driveRobotRelative,
+                new PPHolonomicDriveController(
+                    new PIDConstants(0.08, 0.0, 0.0),
+                    new PIDConstants(0.00, 0.0, 0.0)
+                ),
+                RobotConfig.fromGUISettings(),
+                () -> DriverStation.getAlliance()
+                        .map(a -> a == DriverStation.Alliance.Red)
+                        .orElse(false),
+                this
+            );
+        } catch (Exception e) {
+            System.out.println("PathPlanner config failed!");
+            e.printStackTrace();
+        }
     }
-}
 
-    // ================= LIMELIGHT VISION =================
+    // ================= LIMELIGHT =================
     private void updateVision() {
 
-    var estimate =
-        LimelightHelpers.getBotPoseEstimate_wpiBlue(LIMELIGHT_NAME);
+        var estimate =
+            LimelightHelpers.getBotPoseEstimate_wpiBlue(LIMELIGHT_NAME);
 
-    if (estimate == null) return;
-    if (estimate.tagCount <= 0) return;
+        if (estimate == null) return;
+        if (estimate.tagCount <= 0) return;
 
-    if (estimate.rawFiducials.length > 0 &&
-        estimate.rawFiducials[0].ambiguity > MAX_VISION_AMBIGUITY)
-        return;
+        if (estimate.rawFiducials.length > 0 &&
+            estimate.rawFiducials[0].ambiguity > MAX_VISION_AMBIGUITY)
+            return;
 
-    if (estimate.timestampSeconds == lastVisionTimestamp) return;
-    lastVisionTimestamp = estimate.timestampSeconds;
+        if (estimate.timestampSeconds == lastVisionTimestamp) return;
+        lastVisionTimestamp = estimate.timestampSeconds;
 
-    // Distance-based trust
-    double distance = estimate.avgTagDist;
+        double distance = estimate.avgTagDist;
 
-    double xyStdDev = 0.3 + (distance * 0.1);
-    double thetaStdDev = Math.toRadians(5 + distance * 2);
+        double xyStdDev = 0.3 + (distance * 0.1);
+        double thetaStdDev = Math.toRadians(5 + distance * 2);
 
-    setVisionMeasurementStdDevs(
-        VecBuilder.fill(xyStdDev, xyStdDev, thetaStdDev)
-    );
+        setVisionMeasurementStdDevs(
+            VecBuilder.fill(xyStdDev, xyStdDev, thetaStdDev)
+        );
 
-    addVisionMeasurement(
-        estimate.pose,
-        Utils.getCurrentTimeSeconds()
-    );
-}
-
-
+        addVisionMeasurement(
+            estimate.pose,
+            Utils.getCurrentTimeSeconds()
+        );
+    }
 
     // ================= PERIODIC =================
     @Override
@@ -239,5 +232,8 @@ public class SwerveSubsystem extends TunerSwerveDrivetrain implements Subsystem 
         field.setRobotPose(getPose());
 
         updateVision();
+
+        // 🔥 Drive assist telemetry
+        driveAssist.publishTelemetry();
     }
 }
