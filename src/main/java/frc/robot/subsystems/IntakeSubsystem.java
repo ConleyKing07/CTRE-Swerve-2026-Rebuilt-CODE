@@ -29,14 +29,10 @@ public class IntakeSubsystem extends SubsystemBase {
 
   
     /** Run intake in */
-    public void intakeIn(double speed){
+    public void intakeRun(double speed){
         intakeMotor.set(speed);
     }
 
-    /** Run intake out */
-    public void intakeOut(double speed){
-        intakeMotor.set(-speed);
-    }
 
     /** Stop intake */
     public void stop() {

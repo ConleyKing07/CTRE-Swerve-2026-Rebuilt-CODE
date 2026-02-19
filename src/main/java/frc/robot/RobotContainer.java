@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 
@@ -118,13 +117,28 @@ public class RobotContainer {
         RobotModeTriggers.disabled()
             .whileTrue(drivetrain.applyRequest(() -> idle).ignoringDisable(true));
 
-        // ---------------- Intake ----------------
-        new Trigger(() -> scoringXbox.getRightTriggerAxis() > 0.1)
-            .whileTrue(new Intake(intake, 0.95));
-        new Trigger(() -> scoringXbox.getLeftTriggerAxis() > 0.1)
-            .whileTrue(new Outtake(intake, 0.3));
-        scoringXbox.a().onTrue(new IntakeDeploy(intakeFlop));
-        scoringXbox.b().onTrue(new IntakeRetract(intakeFlop));
+        // ---------------- Intake (Analog Trigger Control) ----------------
+intake.setDefaultCommand(
+    intake.run(() -> {
+
+        double intakeAxis = scoringXbox.getRightTriggerAxis();
+        double outtakeAxis = scoringXbox.getLeftTriggerAxis();
+
+        // Deadband
+        if (intakeAxis < 0.1) intakeAxis = 0;
+        if (outtakeAxis < 0.1) outtakeAxis = 0;
+
+        // Right trigger = intake forward
+        // Left trigger = reverse
+        double speed = intakeAxis - outtakeAxis;
+
+        intake.intakeRun(speed);
+    })
+);
+
+scoringXbox.a().onTrue(new IntakeDeploy(intakeFlop));
+scoringXbox.b().onTrue(new IntakeRetract(intakeFlop));
+
 
         // ---------------- Shooting ----------------
         scoringXbox.leftBumper().whileTrue(armShoot);
