@@ -76,13 +76,13 @@ public class SwerveSubsystem extends TunerSwerveDrivetrain implements Subsystem 
 
         for (var module : getModules()){
         module.getDriveMotor().getPosition().setUpdateFrequency(150);
-        module.getDriveMotor().getVelocity().setUpdateFrequency(50);
+        module.getDriveMotor().getVelocity().setUpdateFrequency(100);
         module.getDriveMotor().getMotorVoltage().setUpdateFrequency(10);
         module.getDriveMotor().getStatorCurrent().setUpdateFrequency(10);
         module.getDriveMotor().getSupplyCurrent().setUpdateFrequency(10);
 
         module.getSteerMotor().getPosition().setUpdateFrequency(150);
-        module.getSteerMotor().getVelocity().setUpdateFrequency(50);
+        module.getSteerMotor().getVelocity().setUpdateFrequency(100);
         module.getSteerMotor().getMotorVoltage().setUpdateFrequency(10);
         module.getSteerMotor().getStatorCurrent().setUpdateFrequency(10);
         module.getSteerMotor().getSupplyCurrent().setUpdateFrequency(10);
@@ -171,8 +171,8 @@ public class SwerveSubsystem extends TunerSwerveDrivetrain implements Subsystem 
             this::getChassisSpeeds,
             this::driveRobotRelative,
             new PPHolonomicDriveController(
-                new PIDConstants(2.0, 0.0, 0.0),
-                new PIDConstants(2.0, 0.0, 0.0)
+                new PIDConstants(0.08, 0.0, 0.0),
+                new PIDConstants(0.00, 0.0, 0.0)
             ),
             RobotConfig.fromGUISettings(),  // ← Must be inside try
             () -> DriverStation.getAlliance()
@@ -206,7 +206,7 @@ public class SwerveSubsystem extends TunerSwerveDrivetrain implements Subsystem 
     // Distance-based trust
     double distance = estimate.avgTagDist;
 
-    double xyStdDev = 0.3 + (distance * 0.15);
+    double xyStdDev = 0.3 + (distance * 0.1);
     double thetaStdDev = Math.toRadians(5 + distance * 2);
 
     setVisionMeasurementStdDevs(

@@ -22,7 +22,7 @@ public class IntakeFlopSubsystem extends SubsystemBase {
     private static final double DEPLOY_POSITION = 14;
 
     private static final double POSITION_TOLERANCE = 0.2;
-    private static final double STOW_HOLD_OUTPUT = -0.1;
+    private static final double STOW_HOLD_OUTPUT = -0.15;
 
     private boolean clampActive = false;
     private boolean movingToStow = false;
@@ -35,13 +35,13 @@ public class IntakeFlopSubsystem extends SubsystemBase {
 
         SparkMaxConfig config = new SparkMaxConfig();
         config.idleMode(IdleMode.kBrake);
-        config.smartCurrentLimit(50);
+        config.smartCurrentLimit(30);
 
         config.closedLoop
-            .p(0.65)
+            .p(0.6)
             .i(0.0)
-            .d(0.3)
-            .outputRange(-0.3, 0.2);
+            .d(0.2)
+            .outputRange(-0.3, 0.3);
 
         armMotor.configure(
             config,

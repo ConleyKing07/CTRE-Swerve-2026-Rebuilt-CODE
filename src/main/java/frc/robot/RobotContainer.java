@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
+
+import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import frc.robot.generated.TunerConstants;
@@ -81,6 +83,13 @@ public class RobotContainer {
     // ---------------- Bindings ----------------
     private void configureBindings() {
 
+
+        NamedCommands.registerCommand("Deploy", new IntakeDeploy(intakeFlop));
+        NamedCommands.registerCommand("Retract", new IntakeRetract(intakeFlop));
+        NamedCommands.registerCommand("Intake", new RunIntake(intake, .95));
+        NamedCommands.registerCommand("Arm", armShoot);
+        NamedCommands.registerCommand("Fire", fire);
+        
         // ---------------- Speed boost toggle ----------------
         driverXbox.rightBumper().whileTrue(new InstantCommand(() -> speedBoost = true))
                                 .onFalse(new InstantCommand(() -> speedBoost = false));

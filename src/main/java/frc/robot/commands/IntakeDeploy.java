@@ -16,14 +16,14 @@ public class IntakeDeploy extends Command {
     public void initialize() {
         flop.deploy();   // send PID setpoint once
     }
-
+@Override
+    public void end(boolean interrupted) {
+        flop.deploy();     // optional but recommended
+    }
+    
     @Override
     public boolean isFinished() {
         return flop.isDeployed();
     }
 
-    @Override
-    public void end(boolean interrupted) {
-        flop.stop();     // optional but recommended
-    }
 }
