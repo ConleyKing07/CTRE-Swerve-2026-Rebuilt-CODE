@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.7063312391871133,
-        "y": 0.6139594321269488
+        "x": 0.6309727164887315,
+        "y": 0.17782918149466131
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.806166641221868,
-        "y": 0.6204865204960001
+        "x": 0.32971530249110353,
+        "y": 2.65244365361803
       },
       "isLocked": false,
       "linkedName": "OutpostDump"
@@ -33,7 +33,7 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 4.0,
+    "maxVelocity": 5.0,
     "maxAcceleration": 2.0,
     "maxAngularVelocity": 400.0,
     "maxAngularAcceleration": 1500.0,

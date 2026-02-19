@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.642744888125171,
-        "y": 2.3304196172464504
+        "x": 2.6431749018411206,
+        "y": 2.3934162074572507
       },
       "isLocked": false,
       "linkedName": "OutsideBumpOutpostSide"
     },
     {
       "anchor": {
-        "x": 0.7063312391871133,
-        "y": 0.6139594321269488
+        "x": 0.6309727164887315,
+        "y": 0.17782918149466131
       },
       "prevControl": {
-        "x": 1.450000395782952,
-        "y": 0.5229716011615523
+        "x": 2.7951025545008203,
+        "y": 0.14172330665949284
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,7 +33,7 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 4.0,
+    "maxVelocity": 5.0,
     "maxAcceleration": 2.0,
     "maxAngularVelocity": 400.0,
     "maxAngularAcceleration": 1500.0,

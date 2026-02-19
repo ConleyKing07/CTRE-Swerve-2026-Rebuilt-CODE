@@ -5,9 +5,105 @@
     "data": {
       "commands": [
         {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Bumpstart-Outpost"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Deploy"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 2.0
+          }
+        },
+        {
           "type": "path",
           "data": {
-            "pathName": "Bumpstart-Outpost"
+            "pathName": "Outpost-ShootPoint"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Arm"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.5
+                      }
+                    },
+                    {
+                      "type": "parallel",
+                      "data": {
+                        "commands": [
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "Fire"
+                            }
+                          },
+                          {
+                            "type": "sequential",
+                            "data": {
+                              "commands": [
+                                {
+                                  "type": "wait",
+                                  "data": {
+                                    "waitTime": 2.0
+                                  }
+                                },
+                                {
+                                  "type": "parallel",
+                                  "data": {
+                                    "commands": [
+                                      {
+                                        "type": "named",
+                                        "data": {
+                                          "name": "Intake"
+                                        }
+                                      },
+                                      {
+                                        "type": "named",
+                                        "data": {
+                                          "name": "Retract"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
           }
         }
       ]

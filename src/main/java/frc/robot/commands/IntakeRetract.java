@@ -14,16 +14,16 @@ public class IntakeRetract extends Command {
 
     @Override
     public void initialize() {
-        flop.stow();
+        flop.stow();   // send PID setpoint once
     }
-
+@Override
+    public void end(boolean interrupted) {
+        flop.stow();     // optional but recommended
+    }
+    
     @Override
     public boolean isFinished() {
-        return flop.isStowed();   // add this helper like we talked about
+        return flop.isDeployed();
     }
 
-    @Override
-    public void end(boolean interrupted) {
-        flop.stop();
-    }
 }

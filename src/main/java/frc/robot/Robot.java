@@ -28,13 +28,13 @@ public class Robot extends TimedRobot {
       UsbCamera camera = CameraServer.startAutomaticCapture(0);
 
       // Set max resolution (adjust if camera supports higher)
-      camera.setResolution(160, 90);
-      camera.setFPS(60);
+      camera.setResolution(192, 108);
+      camera.setFPS(20);
 
       // Get video from camera
       CvSink cvSink = CameraServer.getVideo();
       CvSource outputStream =
-          CameraServer.putVideo("FlippedCam", 160, 90);
+          CameraServer.putVideo("FlippedCam", 192, 108);
 
       Mat mat = new Mat();
 
