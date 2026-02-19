@@ -8,8 +8,8 @@
   "autoFolders": [
     "Rebuilt Autos"
   ],
-  "defaultMaxVel": 5.0,
-  "defaultMaxAccel": 3.0,
+  "defaultMaxVel": 4.0,
+  "defaultMaxAccel": 2.0,
   "defaultMaxAngVel": 400.0,
   "defaultMaxAngAccel": 1500.0,
   "defaultNominalVoltage": 12.0,

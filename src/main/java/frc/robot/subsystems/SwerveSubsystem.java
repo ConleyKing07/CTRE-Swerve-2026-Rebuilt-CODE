@@ -35,6 +35,8 @@ public class SwerveSubsystem extends TunerSwerveDrivetrain implements Subsystem 
     // ================= LIMELIGHT =================
     private static final String LIMELIGHT_NAME = "limelight-shooter";
     private static final double MAX_VISION_AMBIGUITY = 0.7;
+    private double lastVisionTimestamp = -1;
+
 
     // ================= SIM =================
     private Notifier simNotifier;
@@ -48,7 +50,7 @@ public class SwerveSubsystem extends TunerSwerveDrivetrain implements Subsystem 
             lastSimTime = now;
             updateSimState(dt, RobotController.getBatteryVoltage());
         });
-        simNotifier.startPeriodic(0.005);
+        simNotifier.startPeriodic(0.02);
     }
 
     // ================= FIELD VIS =================
@@ -153,8 +155,8 @@ public class SwerveSubsystem extends TunerSwerveDrivetrain implements Subsystem 
             this::getChassisSpeeds,
             this::driveRobotRelative,
             new PPHolonomicDriveController(
-                new PIDConstants(5.0, 0.0, 0.0),
-                new PIDConstants(5.0, 0.0, 0.0)
+                new PIDConstants(2.0, 0.0, 0.0),
+                new PIDConstants(2.0, 0.0, 0.0)
             ),
             RobotConfig.fromGUISettings(),  // ← Must be inside try
             () -> DriverStation.getAlliance()
@@ -172,21 +174,36 @@ public class SwerveSubsystem extends TunerSwerveDrivetrain implements Subsystem 
     // ================= LIMELIGHT VISION =================
     private void updateVision() {
 
-        var estimate =
-            LimelightHelpers.getBotPoseEstimate_wpiBlue(LIMELIGHT_NAME);
+    var estimate =
+        LimelightHelpers.getBotPoseEstimate_wpiBlue(LIMELIGHT_NAME);
 
-        if (estimate == null) return;
-        if (estimate.tagCount <= 0) return;
+    if (estimate == null) return;
+    if (estimate.tagCount <= 0) return;
 
-        if (estimate.rawFiducials.length > 0 &&
-            estimate.rawFiducials[0].ambiguity > MAX_VISION_AMBIGUITY)
-            return;
+    if (estimate.rawFiducials.length > 0 &&
+        estimate.rawFiducials[0].ambiguity > MAX_VISION_AMBIGUITY)
+        return;
 
-        addVisionMeasurement(
-            estimate.pose,
-            Utils.getCurrentTimeSeconds()
-        );
-    }
+    if (estimate.timestampSeconds == lastVisionTimestamp) return;
+    lastVisionTimestamp = estimate.timestampSeconds;
+
+    // Distance-based trust
+    double distance = estimate.avgTagDist;
+
+    double xyStdDev = 0.3 + (distance * 0.15);
+    double thetaStdDev = Math.toRadians(5 + distance * 2);
+
+    setVisionMeasurementStdDevs(
+        VecBuilder.fill(xyStdDev, xyStdDev, thetaStdDev)
+    );
+
+    addVisionMeasurement(
+        estimate.pose,
+        Utils.getCurrentTimeSeconds()
+    );
+}
+
+
 
     // ================= PERIODIC =================
     @Override
