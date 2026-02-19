@@ -27,14 +27,14 @@ public class Robot extends TimedRobot {
       // Start automatic capture (USB cam 0)
       UsbCamera camera = CameraServer.startAutomaticCapture(0);
 
-      // 🔥 Set max resolution (adjust if camera supports higher)
-      camera.setResolution(1280, 720);
-      camera.setFPS(30);
+      // Set max resolution (adjust if camera supports higher)
+      camera.setResolution(160, 90);
+      camera.setFPS(60);
 
       // Get video from camera
       CvSink cvSink = CameraServer.getVideo();
       CvSource outputStream =
-          CameraServer.putVideo("FlippedCam", 1280, 720);
+          CameraServer.putVideo("FlippedCam", 160, 90);
 
       Mat mat = new Mat();
 
@@ -45,7 +45,7 @@ public class Robot extends TimedRobot {
           continue;
         }
 
-        // 🔥 Flip image 180° (flip both X and Y)
+        // Flip image 180° (flip both X and Y)
         Core.flip(mat, mat, -1);
 
         outputStream.putFrame(mat);

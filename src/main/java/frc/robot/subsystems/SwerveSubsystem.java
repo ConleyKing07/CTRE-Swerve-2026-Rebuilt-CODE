@@ -74,6 +74,22 @@ public class SwerveSubsystem extends TunerSwerveDrivetrain implements Subsystem 
     ) {
         super(constants, modules);
 
+        for (var module : getModules()){
+        module.getDriveMotor().getPosition().setUpdateFrequency(150);
+        module.getDriveMotor().getVelocity().setUpdateFrequency(50);
+        module.getDriveMotor().getMotorVoltage().setUpdateFrequency(10);
+        module.getDriveMotor().getStatorCurrent().setUpdateFrequency(10);
+        module.getDriveMotor().getSupplyCurrent().setUpdateFrequency(10);
+
+        module.getSteerMotor().getPosition().setUpdateFrequency(150);
+        module.getSteerMotor().getVelocity().setUpdateFrequency(50);
+        module.getSteerMotor().getMotorVoltage().setUpdateFrequency(10);
+        module.getSteerMotor().getStatorCurrent().setUpdateFrequency(10);
+        module.getSteerMotor().getSupplyCurrent().setUpdateFrequency(10);
+
+        getPigeon2().getYaw().setUpdateFrequency(150);
+        getPigeon2().getAngularVelocityZWorld().setUpdateFrequency(150);
+        }
         SmartDashboard.putData("Field", field);
 
         setVisionMeasurementStdDevs(
