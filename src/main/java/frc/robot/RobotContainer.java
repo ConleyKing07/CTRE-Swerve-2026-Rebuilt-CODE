@@ -95,30 +95,48 @@ public class RobotContainer {
                                 .onFalse(new InstantCommand(() -> speedBoost = false));
 
         // ---------------- Default drive command ----------------
-        drivetrain.setDefaultCommand(
-            drivetrain.applyRequest(() -> {
-                double speedScale = speedBoost ? kBoostSpeedScale : kNormalSpeedScale;
+drivetrain.setDefaultCommand(
+    drivetrain.applyRequest(() -> {
 
-                double vx = -driverXbox.getLeftY() * MaxSpeed * speedScale;
-                double vy = -driverXbox.getLeftX() * MaxSpeed * speedScale;
-                double rot = -driverXbox.getRightX() * MaxAngularRate * speedScale;
+        double speedScale = speedBoost ? kBoostSpeedScale : kNormalSpeedScale;
 
-                // Heading-hold when right stick is near zero
-                if (Math.abs(driverXbox.getRightX()) < 0.05) {
-                    if (!drivetrain.headingHoldEnabled) drivetrain.enableHeadingHold();
-                    double error = drivetrain.getPose().getRotation()
-                                    .minus(drivetrain.targetHeading)
-                                    .getRadians();
-                    rot += SwerveSubsystem.kP_heading * error;
-                } else {
-                    drivetrain.disableHeadingHold();
-                }
+        double vx = -driverXbox.getLeftY() * MaxSpeed * speedScale;
+        double vy = -driverXbox.getLeftX() * MaxSpeed * speedScale;
+        double rot = -driverXbox.getRightX() * MaxAngularRate * speedScale;
 
-                return drive.withVelocityX(vx)
-                            .withVelocityY(vy)
-                            .withRotationalRate(rot);
-            })
-        );
+        boolean robotOriented = driverXbox.leftBumper().getAsBoolean();
+
+        // Heading-hold only applies in FIELD oriented mode
+        if (!robotOriented) {
+
+            if (Math.abs(driverXbox.getRightX()) < 0.05) {
+                if (!drivetrain.headingHoldEnabled)
+                    drivetrain.enableHeadingHold();
+
+                double error = drivetrain.getPose().getRotation()
+                        .minus(drivetrain.targetHeading)
+                        .getRadians();
+
+                rot += SwerveSubsystem.kP_heading * error;
+
+            } else {
+                drivetrain.disableHeadingHold();
+            }
+
+            return drive
+                    .withVelocityX(vx)
+                    .withVelocityY(vy)
+                    .withRotationalRate(rot);
+        }
+
+        // ---------------- ROBOT ORIENTED ----------------
+        return new SwerveRequest.RobotCentric()
+                .withVelocityX(vx)
+                .withVelocityY(vy)
+                .withRotationalRate(rot);
+    })
+);
+
 
         final var idle = new SwerveRequest.Idle();
 
