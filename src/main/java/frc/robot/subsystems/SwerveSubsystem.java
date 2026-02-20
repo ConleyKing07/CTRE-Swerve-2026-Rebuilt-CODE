@@ -81,10 +81,10 @@ public class SwerveSubsystem extends TunerSwerveDrivetrain implements Subsystem 
 
         for (var module : getModules()) {
             module.getDriveMotor().getPosition().setUpdateFrequency(150);
-            module.getDriveMotor().getVelocity().setUpdateFrequency(100);
+            module.getDriveMotor().getVelocity().setUpdateFrequency(150);
 
             module.getSteerMotor().getPosition().setUpdateFrequency(150);
-            module.getSteerMotor().getVelocity().setUpdateFrequency(100);
+            module.getSteerMotor().getVelocity().setUpdateFrequency(150);
 
             getPigeon2().getYaw().setUpdateFrequency(150);
             getPigeon2().getAngularVelocityZWorld().setUpdateFrequency(150);

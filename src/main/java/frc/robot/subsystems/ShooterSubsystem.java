@@ -18,7 +18,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
     private final VelocityVoltage velocityRequest = new VelocityVoltage(0);
 
-    private static final double RPM_TOLERANCE = 25.0;
+    private static final double RPM_TOLERANCE = 100;
 
     private boolean armed = false;
     private double currentTargetRPM = 0;
@@ -33,11 +33,12 @@ public class ShooterSubsystem extends SubsystemBase {
 
         var cfg = new com.ctre.phoenix6.configs.TalonFXConfiguration();
         cfg.CurrentLimits.SupplyCurrentLimitEnable = true;
-        cfg.CurrentLimits.SupplyCurrentLimit = 20;
+        cfg.CurrentLimits.SupplyCurrentLimit = 40;
 
-        cfg.Slot0.kP = 0.4;
+        cfg.Slot0.kP = 0.5;
         cfg.Slot0.kV = 0.12;
-        cfg.Slot0.kS = 0.05;
+        cfg.Slot0.kS = 0.01;
+        cfg.Slot0.kA = 2.75;
 
         master.getConfigurator().apply(cfg);
 
@@ -49,11 +50,16 @@ public class ShooterSubsystem extends SubsystemBase {
         );
 
         // RPM table
-        rpmTable.put(1.75, 2400.0);
-        rpmTable.put(2.0, 2500.0);
-        rpmTable.put(2.5, 2700.0);
-        rpmTable.put(3.0, 2900.0);
-        rpmTable.put(3.5, 3100.0);
+        rpmTable.put(1.75, 2200.0);
+        rpmTable.put(2.0, 2300.0);
+        rpmTable.put(2.5, 2500.0);
+        rpmTable.put(3.0, 2750.0);
+        rpmTable.put(3.5, 3000.0);
+        rpmTable.put(4.0, 3250.0);
+        rpmTable.put(4.5, 3500.0);
+        rpmTable.put(5.0, 3700.0);
+        rpmTable.put(5.5, 3900.0);
+        rpmTable.put(6.0, 4200.0);
     }
 
     

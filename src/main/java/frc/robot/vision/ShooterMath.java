@@ -4,11 +4,13 @@ public class ShooterMath {
 
     // distance meters , rpm
     private static final double[][] table = {
-        {1.75, 2400},
-        {2.0, 2500},
-        {2.5, 2800},
-        {3.0, 2500},
-        {3.5, 2500}
+        {1.75, 2100},
+        {2.0, 2200},
+        {2.5, 2400},
+        {3.0, 2600},
+        {3.5, 2800},
+        {4.0, 3000},
+        {4.5, 3200}
     };
 
     public static double getRPM(double distance){

@@ -14,7 +14,7 @@ public class PreShooterSubsystem extends SubsystemBase {
 
     private final VelocityVoltage velocityRequest = new VelocityVoltage(0);
 
-    private static final double RPM_RATIO = 1.5;
+    private static final double RPM_RATIO = 2.8;
     private static final double RPM_TOLERANCE = 25.0;
 
     private double targetRPM = 0;
@@ -29,11 +29,12 @@ public class PreShooterSubsystem extends SubsystemBase {
 
  var cfg = new com.ctre.phoenix6.configs.TalonFXConfiguration();
         cfg.CurrentLimits.SupplyCurrentLimitEnable = true;
-        cfg.CurrentLimits.SupplyCurrentLimit = 20;
+        cfg.CurrentLimits.SupplyCurrentLimit = 30;
 
-        cfg.Slot0.kP = 0.25;
-        cfg.Slot0.kV = 0.12;
+        cfg.Slot0.kP = 0.3;
+        cfg.Slot0.kV = 0.22;
         cfg.Slot0.kS = 0.05;
+        cfg.Slot0.kA = 2.75;
 
         master.getConfigurator().apply(cfg);
 

@@ -27,7 +27,7 @@ public class DriveAssistManager {
     private static final double LEAD_TIME = 0.5; // seconds
 
     // ================= AIM SETTINGS =================
-    private static final double AIM_TOLERANCE_DEG = 0.25;
+    private static final double AIM_TOLERANCE_DEG = 0.05;
 
     public DriveAssistManager(SwerveSubsystem s) {
         this.swerve = s;
@@ -116,6 +116,9 @@ public class DriveAssistManager {
     public boolean isAimed() {
         return Math.abs(getAimErrorDeg()) <= AIM_TOLERANCE_DEG;
     }
+    public boolean isAimedDR() {
+        return Math.abs(getAimErrorDeg()) <= 7.5;
+    }
 
     // ==================================================
     // Distance to Target
@@ -138,7 +141,7 @@ public class DriveAssistManager {
         SmartDashboard.putNumber("Target Distance (m)", meters);
         SmartDashboard.putNumber("Target Distance (ft)", feet);
         SmartDashboard.putNumber("Aim Error (deg)", error);
-        SmartDashboard.putBoolean("Aimed", isAimed());
+        SmartDashboard.putBoolean("Aimed", isAimedDR());
     }
 
     // ==================================================
