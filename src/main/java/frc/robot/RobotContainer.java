@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 
@@ -19,6 +21,10 @@ import com.pathplanner.lib.commands.PathPlannerAuto;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
+import frc.robot.commands.Autos.AutoAim;
+import frc.robot.commands.Autos.AutoFireCommand;
+import frc.robot.commands.Autos.AutoRunIntake;
+import frc.robot.commands.Autos.AutoSpinUp;
 import frc.robot.vision.DriveAssistManager;
 
 public class RobotContainer {
@@ -89,6 +95,22 @@ public class RobotContainer {
         NamedCommands.registerCommand("Intake", new RunIntake(intake, .95));
         NamedCommands.registerCommand("Arm", armShoot);
         NamedCommands.registerCommand("Fire", fire);
+
+        NamedCommands.registerCommand("AutoIntake",
+          new AutoRunIntake(intake, 0.95, 2.0) // 2 seconds intake
+           );
+
+        NamedCommands.registerCommand("AutoShoot",
+          new SequentialCommandGroup(
+          new ParallelCommandGroup(
+          new AutoAim(drivetrain, driveAssist),
+          new AutoSpinUp(shooter, preshooter, driveAssist)
+           ),
+          new AutoFireCommand(hopper, 1.0)
+           )
+             );
+   
+
         
         // ---------------- Speed boost toggle ----------------
         driverXbox.rightBumper().whileTrue(new InstantCommand(() -> speedBoost = true))
