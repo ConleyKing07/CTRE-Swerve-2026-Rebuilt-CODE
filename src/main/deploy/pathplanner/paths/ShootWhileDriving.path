@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.6735418434511049,
-        "y": 0.6386294736573574
+        "x": 3.3203714285714283,
+        "y": 2.544928571430597
       },
       "prevControl": null,
       "nextControl": {
-        "x": 0.5607165239676352,
-        "y": 0.8920011073529179
+        "x": 2.425760584377833,
+        "y": 3.2662307497395693
       },
       "isLocked": false,
-      "linkedName": "OutpostDump"
+      "linkedName": "BumpShootpoint"
     },
     {
       "anchor": {
-        "x": 3.177842857142857,
-        "y": 1.9489
+        "x": 3.3203714285714283,
+        "y": 5.3048
       },
       "prevControl": {
-        "x": 2.401370071340957,
-        "y": 0.24858406010116774
+        "x": 2.7022212568007014,
+        "y": 4.343667361020425
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "ShootPoint1"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
@@ -37,12 +37,24 @@
         "y": 4.033
       },
       "rotationOffset": 180.0,
-      "minWaypointRelativePos": 0.9542334096109836,
+      "minWaypointRelativePos": 0.0,
       "maxWaypointRelativePos": 1.0,
       "name": "Point Towards Zone"
     }
   ],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "AutoShoot",
+      "waypointRelativePos": 0.0,
+      "endWaypointRelativePos": 1.0,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "AutoShoot"
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 5.0,
     "maxAcceleration": 2.0,
@@ -53,13 +65,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -127.23483398157462
+    "rotation": 128.65980825408997
   },
   "reversed": false,
   "folder": "Rebuilt Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": -131.00908690137734
   },
   "useDefaultConstraints": true
 }

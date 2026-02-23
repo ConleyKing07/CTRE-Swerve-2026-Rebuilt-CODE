@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.177842857142857,
-        "y": 1.9489
+        "x": 3.6008780700678633,
+        "y": 7.201071178845897
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.242628571428572,
-        "y": 3.1927857142857134
+        "x": 2.151424253409905,
+        "y": 7.442209683809816
       },
       "isLocked": false,
-      "linkedName": "ShootPoint1"
+      "linkedName": null
     },
     {
       "anchor": {
-        "x": 6.044550641940085,
-        "y": 2.3604569496685146
+        "x": 0.8218472952630456,
+        "y": 5.870419988782442
       },
       "prevControl": {
-        "x": 5.561957142857143,
-        "y": 2.6874571428571428
+        "x": 2.1652684344616615,
+        "y": 5.78975925750572
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "DriveOverHumpEnd"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
@@ -41,14 +41,14 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 3.0,
-    "rotation": -104.93141717813741
+    "velocity": 0,
+    "rotation": 180.0
   },
   "reversed": false,
   "folder": "Rebuilt Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -127.23483398157462
+    "rotation": 90.0
   },
   "useDefaultConstraints": true
 }

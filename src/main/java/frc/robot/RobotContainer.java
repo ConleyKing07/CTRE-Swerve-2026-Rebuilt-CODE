@@ -92,12 +92,8 @@ public class RobotContainer {
 
         NamedCommands.registerCommand("Deploy", new IntakeDeploy(intakeFlop));
         NamedCommands.registerCommand("Retract", new IntakeRetract(intakeFlop));
-        NamedCommands.registerCommand("Intake", new RunIntake(intake, .95));
-        NamedCommands.registerCommand("Arm", armShoot);
-        NamedCommands.registerCommand("Fire", fire);
-
         NamedCommands.registerCommand("AutoIntake",
-          new AutoRunIntake(intake, 0.95, 2.0) // 2 seconds intake
+          new AutoRunIntake(intake, 0.95, 3.0) // 2 seconds intake
            );
 
         NamedCommands.registerCommand("AutoShoot",

@@ -3,41 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 6.044550641940085,
-        "y": 5.400028530670471
+        "x": 5.76927142857143,
+        "y": 2.3604569496685146
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.319985734664764,
-        "y": 5.425905848787448
+        "x": 5.044706521296108,
+        "y": 2.3863342677854913
       },
       "isLocked": false,
       "linkedName": "CollectPiecesEnd"
     },
     {
       "anchor": {
-        "x": 3.6457205096848817,
-        "y": 5.516147896397128
+        "x": 3.0223571428571425,
+        "y": 2.3604569496685146
       },
       "prevControl": {
-        "x": 4.409114679188272,
-        "y": 5.334298478603355
-      },
-      "nextControl": {
-        "x": 3.037274278511428,
-        "y": 5.661086903423716
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 2.900479425018014,
-        "y": 6.171960050903972
-      },
-      "prevControl": {
-        "x": 3.0741120533799324,
-        "y": 5.992094238788018
+        "x": 4.123714285714286,
+        "y": 2.4153571428571423
       },
       "nextControl": null,
       "isLocked": false,
@@ -46,8 +30,8 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 1,
-      "rotationDegrees": 90.0
+      "waypointRelativePos": 0.5,
+      "rotationDegrees": -131.2430750899527
     }
   ],
   "constraintZones": [],
@@ -63,13 +47,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 130.15599962491936
+    "rotation": -132.77816049868676
   },
   "reversed": false,
   "folder": "Rebuilt Paths",
   "idealStartingState": {
     "velocity": 4.0,
-    "rotation": 90.0
+    "rotation": -104.2716778155282
   },
   "useDefaultConstraints": true
 }
