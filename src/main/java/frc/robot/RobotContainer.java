@@ -99,9 +99,9 @@ public class RobotContainer {
           new SequentialCommandGroup(
           new ParallelCommandGroup(
           new AutoAim(drivetrain, driveAssist),
-          new AutoSpinUp(shooter, preshooter, driveAssist)
+          new AutoSpinUp(shooter, preshooter, driveAssist).withTimeout(6)
            ),
-          new AutoFireCommand(hopper, 5)
+          new AutoFireCommand(hopper, 6)
            )
              );
    
