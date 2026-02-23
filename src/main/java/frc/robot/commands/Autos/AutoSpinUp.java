@@ -1,5 +1,6 @@
 package frc.robot.commands.Autos;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.PreShooterSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -11,28 +12,33 @@ public class AutoSpinUp extends Command {
     private final PreShooterSubsystem preshooter;
     private final DriveAssistManager driveAssist;
 
+    private final Timer timer = new Timer();
+    private final double durationSeconds;
+
     public AutoSpinUp(
         ShooterSubsystem shooter,
         PreShooterSubsystem preshooter,
-        DriveAssistManager driveAssist) {
+        DriveAssistManager driveAssist,
+        double durationSeconds) {
 
         this.shooter = shooter;
         this.preshooter = preshooter;
         this.driveAssist = driveAssist;
+        this.durationSeconds = durationSeconds;
 
         addRequirements(shooter, preshooter);
     }
 
     @Override
     public void initialize() {
+        timer.reset();
+        timer.start();
         shooter.arm();
     }
 
     @Override
     public void execute() {
-
-        double distance =
-            driveAssist.getDistanceToTarget();
+        double distance = driveAssist.getDistanceToTarget();
 
         shooter.setRPMFromDistance(distance);
 
@@ -42,14 +48,13 @@ public class AutoSpinUp extends Command {
 
     @Override
     public boolean isFinished() {
-        return shooter.readyToFire();
+        return timer.hasElapsed(durationSeconds);
     }
 
     @Override
     public void end(boolean interrupted) {
-        if (interrupted) {
-            shooter.disarm();
-            preshooter.stop();
-        }
+        shooter.disarm();
+        preshooter.stop();
+        timer.stop();
     }
 }
