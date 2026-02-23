@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.3203714285714283,
-        "y": 2.544928571430597
+        "x": 2.7290154211150655,
+        "y": 2.1360023724792403
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.425760584377833,
-        "y": 3.2662307497395693
+        "x": 1.8344045769214703,
+        "y": 2.8573045507882124
       },
       "isLocked": false,
       "linkedName": "BumpShootpoint"
@@ -71,7 +71,7 @@
   "folder": "Rebuilt Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -131.00908690137734
+    "rotation": -131.63353933657018
   },
   "useDefaultConstraints": true
 }

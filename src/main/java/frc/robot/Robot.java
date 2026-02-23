@@ -28,7 +28,7 @@ public class Robot extends TimedRobot {
       UsbCamera camera = CameraServer.startAutomaticCapture(0);
 
       // Set max resolution (adjust if camera supports higher)
-      camera.setResolution(192, 108);
+      camera.setResolution(384, 216);
       camera.setFPS(20);
 
       // Get video from camera

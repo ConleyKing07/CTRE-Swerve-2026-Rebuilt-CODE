@@ -42,8 +42,7 @@ public class AutoSpinUp extends Command {
 
     @Override
     public boolean isFinished() {
-        return shooter.readyToFire()
-            && preshooter.atSpeed();
+        return shooter.readyToFire();
     }
 
     @Override

@@ -78,10 +78,9 @@ public class RobotContainer {
     public RobotContainer() {
         configureBindings();
 
-        autoChooser.setDefaultOption("NewAuto", "NewAuto");
-        autoChooser.addOption("2PieceProcesor", "2PiecePR");
+        autoChooser.setDefaultOption("OutpostStealAuto", "OutpostStealAuto");
+        autoChooser.addOption("StealAuto", "StealAuto");
         autoChooser.addOption("2PieceOposite", "2PieceOP");
-        autoChooser.addOption("PushBot1Algae1Coral", "PushBot1Algae1Coral");
 
         Shuffleboard.getTab("Driver").add(autoChooser);
     }
@@ -102,7 +101,7 @@ public class RobotContainer {
           new AutoAim(drivetrain, driveAssist),
           new AutoSpinUp(shooter, preshooter, driveAssist)
            ),
-          new AutoFireCommand(hopper, 1.0)
+          new AutoFireCommand(hopper, 5)
            )
              );
    

@@ -15,7 +15,7 @@ public class PreShooterSubsystem extends SubsystemBase {
     private final VelocityVoltage velocityRequest = new VelocityVoltage(0);
 
     private static final double RPM_RATIO = 2.8;
-    private static final double RPM_TOLERANCE = 25.0;
+    private static final double RPM_TOLERANCE = 100;
 
     private double targetRPM = 0;
 
