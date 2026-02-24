@@ -21,7 +21,7 @@ public class IntakeFlopSubsystem extends SubsystemBase {
     private static final double STOW_POSITION = 0.0;
     private static final double DEPLOY_POSITION = 14;
 
-    private static final double POSITION_TOLERANCE = 2.0;
+    private static final double POSITION_TOLERANCE = 5.0;
     private static final double STOW_HOLD_OUTPUT = -0.15;
 
     private boolean clampActive = false;

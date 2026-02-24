@@ -48,60 +48,60 @@
     },
     {
       "anchor": {
-        "x": 6.570047449584817,
-        "y": 1.1585142857163122
+        "x": 6.6130842230130495,
+        "y": 0.8556583629893237
       },
       "prevControl": {
-        "x": 6.486217157358916,
-        "y": 1.3940402547840989
+        "x": 6.529253930787148,
+        "y": 1.0911843320571104
       },
       "nextControl": {
-        "x": 6.653877741810718,
-        "y": 0.9229883166485255
+        "x": 6.696914515238951,
+        "y": 0.6201323939215371
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 7.712842857138288,
-        "y": 1.1585142857163122
+        "x": 7.828873072360619,
+        "y": 0.8556583629893237
       },
       "prevControl": {
-        "x": 7.712842857138288,
-        "y": 0.9085142857163122
+        "x": 7.828873072360619,
+        "y": 0.6056583629893237
       },
       "nextControl": {
-        "x": 7.712842857138288,
-        "y": 2.3505714285734554
+        "x": 7.828873072360619,
+        "y": 2.047715505846467
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 7.712842857138288,
-        "y": 3.335314285716312
+        "x": 7.828873072360619,
+        "y": 3.4055871886121
       },
       "prevControl": {
-        "x": 7.6998857142811445,
-        "y": 2.3635285714305976
+        "x": 7.8159159295034755,
+        "y": 2.4338014743263856
       },
       "nextControl": {
-        "x": 7.722411811543875,
-        "y": 4.052985866135359
+        "x": 7.838442026766206,
+        "y": 4.123258769031146
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 5.6662752075919345,
-        "y": 2.1360023724792403
+        "x": 6.075124555160143,
+        "y": 2.049928825622776
       },
       "prevControl": {
-        "x": 6.793543963360004,
-        "y": 2.5247244092367973
+        "x": 7.202393310928213,
+        "y": 2.438650862380333
       },
       "nextControl": null,
       "isLocked": false,
@@ -111,15 +111,15 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 1,
-      "rotationDegrees": 90.0
+      "rotationDegrees": 177.14780073945929
     },
     {
       "waypointRelativePos": 2,
-      "rotationDegrees": 91.39742438451857
+      "rotationDegrees": 177.3974377975002
     },
     {
       "waypointRelativePos": 3,
-      "rotationDegrees": 16.699244233993554
+      "rotationDegrees": 11.003540851749321
     },
     {
       "waypointRelativePos": 4.0,
@@ -133,11 +133,24 @@
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 3.6748224151539075,
+      "minWaypointRelativePos": 3.466456195737967,
       "maxWaypointRelativePos": 5.199684293606872,
       "constraints": {
         "maxVelocity": 1.5,
         "maxAcceleration": 2.0,
+        "maxAngularVelocity": 400.0,
+        "maxAngularAcceleration": 1500.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    },
+    {
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 0.4830307813733292,
+      "maxWaypointRelativePos": 2.3962115232833368,
+      "constraints": {
+        "maxVelocity": 2.0,
+        "maxAcceleration": 5.0,
         "maxAngularVelocity": 400.0,
         "maxAngularAcceleration": 1500.0,
         "nominalVoltage": 12.0,
@@ -149,7 +162,7 @@
   "eventMarkers": [
     {
       "name": "Deploy",
-      "waypointRelativePos": 3.134964483030785,
+      "waypointRelativePos": 3.4948697711128505,
       "endWaypointRelativePos": null,
       "command": {
         "type": "sequential",
@@ -173,16 +186,16 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 3.0,
-    "maxAcceleration": 2.0,
+    "maxVelocity": 5.0,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 400.0,
     "maxAngularAcceleration": 1500.0,
     "nominalVoltage": 12.0,
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 3.0,
-    "rotation": -57.0680545182385
+    "velocity": 4.0,
+    "rotation": -52.3057595333109
   },
   "reversed": false,
   "folder": "Rebuilt Paths",

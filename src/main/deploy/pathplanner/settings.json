@@ -9,7 +9,7 @@
     "Rebuilt Autos"
   ],
   "defaultMaxVel": 5.0,
-  "defaultMaxAccel": 2.0,
+  "defaultMaxAccel": 3.0,
   "defaultMaxAngVel": 400.0,
   "defaultMaxAngAccel": 1500.0,
   "defaultNominalVoltage": 12.0,
@@ -20,7 +20,7 @@
   "driveGearing": 5.46,
   "maxDriveSpeed": 12.0,
   "driveMotorType": "krakenX60FOC",
-  "driveCurrentLimit": 40.0,
+  "driveCurrentLimit": 50.0,
   "wheelCOF": 1.0,
   "flModuleX": 0.111,
   "flModuleY": 0.264,

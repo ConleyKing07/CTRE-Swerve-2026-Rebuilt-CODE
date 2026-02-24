@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.24485172004745,
-        "y": 2.1360023724792403
+        "x": 1.6100593119810207,
+        "y": 2.049928825622776
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.4014254363393945,
-        "y": 1.3042853932130953
+        "x": 0.7666330282729654,
+        "y": 1.218211846356631
       },
       "isLocked": false,
       "linkedName": "BumpShootpoint"
@@ -34,7 +34,7 @@
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 5.0,
-    "maxAcceleration": 2.0,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 400.0,
     "maxAngularAcceleration": 1500.0,
     "nominalVoltage": 12.0,
@@ -48,7 +48,7 @@
   "folder": "Rebuilt Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -131.63353933657018
+    "rotation": -133.78112476486882
   },
   "useDefaultConstraints": true
 }
