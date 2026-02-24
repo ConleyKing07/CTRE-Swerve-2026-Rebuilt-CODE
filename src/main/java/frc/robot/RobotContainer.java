@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 
@@ -26,7 +27,6 @@ import frc.robot.commands.Autos.AutoFireCommand;
 import frc.robot.commands.Autos.AutoRunIntake;
 import frc.robot.commands.Autos.AutoSpinUp;
 import frc.robot.vision.DriveAssistManager;
-import frc.robot.vision.DriveAssistManager.AimTarget;
 
 public class RobotContainer {
 
@@ -93,24 +93,28 @@ public class RobotContainer {
         NamedCommands.registerCommand("Deploy", new IntakeDeploy(intakeFlop));
         NamedCommands.registerCommand("Retract", new IntakeRetract(intakeFlop));
         NamedCommands.registerCommand("AutoIntake",
-          new AutoRunIntake(intake, 0.95, 3.0) // 2 seconds intake
+          new AutoRunIntake(intake, 0.95, 5.0) // 2 seconds intake
+           );
+        NamedCommands.registerCommand("AutoIntake2",
+          new AutoRunIntake(intake, 0.5, 2.0) // 2 seconds intake
            );
 
         NamedCommands.registerCommand("AutoShoot",
-          new SequentialCommandGroup(
           new ParallelCommandGroup(
           new AutoAim(drivetrain, driveAssist),
-          new AutoSpinUp(shooter, preshooter, driveAssist,5.0)
-           ),
-          new AutoFireCommand(hopper, 5)
-           )
-             );
+          new AutoSpinUp(shooter, preshooter, driveAssist,8.0),
+          new SequentialCommandGroup(
+          new WaitCommand(0.1),
+          new AutoFireCommand(hopper, 7.9))
+          )  
+          );
    
 
         
         // ---------------- Speed boost toggle ----------------
         driverXbox.rightBumper().whileTrue(new InstantCommand(() -> speedBoost = true))
                                 .onFalse(new InstantCommand(() -> speedBoost = false));
+        driverXbox.povRight().onTrue(new AutoAim(drivetrain, driveAssist));
 
         // ---------------- Default drive command ----------------
 drivetrain.setDefaultCommand(
@@ -188,18 +192,6 @@ scoringXbox.b().onTrue(new IntakeRetract(intakeFlop));
         // ---------------- Shooting ----------------
         scoringXbox.leftBumper().whileTrue(armShoot);
         scoringXbox.rightBumper().whileTrue(fire);
-        scoringXbox.povLeft()
-    .onTrue(new InstantCommand(() ->
-        driveAssist.setTarget(AimTarget.PASS_LEFT)))
-    .onFalse(new InstantCommand(() ->
-        driveAssist.setTarget(AimTarget.HUB)));
-
-    scoringXbox.povRight()
-    .onTrue(new InstantCommand(() ->
-        driveAssist.setTarget(AimTarget.PASS_RIGHT)))
-    .onFalse(new InstantCommand(() ->
-        driveAssist.setTarget(AimTarget.HUB)));
-
 
         // ---------------- Driver utilities ----------------
         driverXbox.a().whileTrue(drivetrain.applyRequest(() -> brake));
