@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 
@@ -92,18 +93,21 @@ public class RobotContainer {
         NamedCommands.registerCommand("Deploy", new IntakeDeploy(intakeFlop));
         NamedCommands.registerCommand("Retract", new IntakeRetract(intakeFlop));
         NamedCommands.registerCommand("AutoIntake",
-          new AutoRunIntake(intake, 0.95, 3.0) // 2 seconds intake
+          new AutoRunIntake(intake, 0.95, 5.0) // 2 seconds intake
+           );
+        NamedCommands.registerCommand("AutoIntake2",
+          new AutoRunIntake(intake, 0.5, 2.0) // 2 seconds intake
            );
 
         NamedCommands.registerCommand("AutoShoot",
-          new SequentialCommandGroup(
           new ParallelCommandGroup(
           new AutoAim(drivetrain, driveAssist),
-          new AutoSpinUp(shooter, preshooter, driveAssist).withTimeout(6)
-           ),
-          new AutoFireCommand(hopper, 6)
-           )
-             );
+          new AutoSpinUp(shooter, preshooter, driveAssist,8.0),
+          new SequentialCommandGroup(
+          new WaitCommand(0.1),
+          new AutoFireCommand(hopper, 7.9))
+          )  
+          );
    
 
         

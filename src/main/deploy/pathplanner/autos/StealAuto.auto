@@ -33,13 +33,26 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 4.0
+                        "waitTime": 3.5
                       }
                     },
                     {
-                      "type": "named",
+                      "type": "parallel",
                       "data": {
-                        "name": "Retract"
+                        "commands": [
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "Retract"
+                            }
+                          },
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "AutoIntake2"
+                            }
+                          }
+                        ]
                       }
                     }
                   ]

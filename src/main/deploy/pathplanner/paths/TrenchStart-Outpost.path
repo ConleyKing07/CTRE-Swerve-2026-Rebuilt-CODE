@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.6122586435837185,
-        "y": 0.4345209664690469
+        "x": 2.7290154211150655,
+        "y": 2.1360023724792403
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.8258953415630945,
-        "y": 0.40245006382044657
+        "x": 1.8855891374070102,
+        "y": 1.3042853932130953
       },
       "isLocked": false,
-      "linkedName": "OutsideBumpOutpostSide"
+      "linkedName": "BumpShootpoint"
     },
     {
       "anchor": {
@@ -20,8 +20,8 @@
         "y": 0.6081969157769855
       },
       "prevControl": {
-        "x": 2.3538854282587263,
-        "y": 0.6151099003403318
+        "x": 1.789315271738216,
+        "y": 0.574229843828792
       },
       "nextControl": null,
       "isLocked": false,
@@ -48,7 +48,7 @@
   "folder": "Rebuilt Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": -131.63353933657018
   },
   "useDefaultConstraints": true
 }
