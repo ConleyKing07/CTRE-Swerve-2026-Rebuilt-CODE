@@ -79,9 +79,11 @@ public class RobotContainer {
     public RobotContainer() {
         configureBindings();
 
-        autoChooser.setDefaultOption("OutpostStealAuto", "OutpostStealAuto");
-        autoChooser.addOption("StealAuto", "StealAuto");
-        autoChooser.addOption("2PieceOposite", "2PieceOP");
+        autoChooser.setDefaultOption("OutpostSideSteal", "OutpostSideSteal");
+        autoChooser.addOption("DepotSideSteal", "DepotSideSteal");
+        autoChooser.addOption("ShootPreloadPark", "ShootPreloadPark");
+        autoChooser.addOption("DumpOutpostCollectDepotShoot", "DumpOutpostCollectDepotShoot");
+
 
         Shuffleboard.getTab("Driver").add(autoChooser);
     }

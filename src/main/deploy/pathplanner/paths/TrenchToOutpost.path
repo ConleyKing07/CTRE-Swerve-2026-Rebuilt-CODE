@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.6008780700678633,
-        "y": 7.201071178845897
+        "x": 3.622028469750891,
+        "y": 0.43604982206405685
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.151424253409905,
-        "y": 7.442209683809816
+        "x": 1.8399651159485444,
+        "y": 0.3809610477884089
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "TrenchStart"
     },
     {
       "anchor": {
-        "x": 0.8218472952630456,
-        "y": 5.870419988782442
+        "x": 0.8246381969157779,
+        "y": 0.6081969157769855
       },
       "prevControl": {
-        "x": 2.1652684344616615,
-        "y": 5.78975925750572
+        "x": 2.484168833966474,
+        "y": 0.6274269495968676
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "OutpostDump"
     }
   ],
   "rotationTargets": [],
@@ -48,7 +48,7 @@
   "folder": "Rebuilt Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 90.0
+    "rotation": 180.0
   },
   "useDefaultConstraints": true
 }

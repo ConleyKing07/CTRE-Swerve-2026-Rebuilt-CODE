@@ -7,13 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "TrenchStart-CollectPieces"
+            "pathName": "OutpostTrenchStart-CollectPieces"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "DriveOverTrench"
+            "pathName": "DriveOverOutpostBumpFromC"
           }
         },
         {

@@ -3,37 +3,32 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.76927142857143,
-        "y": 2.3604569496685146
+        "x": 0.8246381969157779,
+        "y": 5.982268188302426
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.044706521296108,
-        "y": 2.3863342677854913
+        "x": 1.8246381969157779,
+        "y": 5.982268188302426
       },
       "isLocked": false,
-      "linkedName": "CollectPiecesEnd"
+      "linkedName": "Depot"
     },
     {
       "anchor": {
-        "x": 3.0223571428571425,
-        "y": 2.3604569496685146
+        "x": 1.904179743223965,
+        "y": 6.085777460770328
       },
       "prevControl": {
-        "x": 4.123714285714286,
-        "y": 2.4153571428571423
+        "x": 0.9041797432239651,
+        "y": 6.085777460770328
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Depot Shoot Point"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.5,
-      "rotationDegrees": -131.2430750899527
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],
@@ -47,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -132.77816049868676
+    "rotation": 137.86240522611172
   },
   "reversed": false,
   "folder": "Rebuilt Paths",
   "idealStartingState": {
-    "velocity": 4.0,
-    "rotation": -104.2716778155282
+    "velocity": 0,
+    "rotation": 180.0
   },
   "useDefaultConstraints": true
 }

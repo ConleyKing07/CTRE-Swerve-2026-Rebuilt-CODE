@@ -1,0 +1,114 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 0.8246381969157779,
+        "y": 0.6081969157769855
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 0.7785164051355205,
+        "y": 1.1432097004279604
+      },
+      "isLocked": false,
+      "linkedName": "OutpostDump"
+    },
+    {
+      "anchor": {
+        "x": 1.7877318116975744,
+        "y": 2.4888302425106996
+      },
+      "prevControl": {
+        "x": 0.6441992177413709,
+        "y": 1.190569423774799
+      },
+      "nextControl": {
+        "x": 2.045776854898471,
+        "y": 2.781790645062695
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.1370756062767473,
+        "y": 3.7180028530670475
+      },
+      "prevControl": {
+        "x": 2.137090434608825,
+        "y": 3.1963474562509604
+      },
+      "nextControl": {
+        "x": 2.137068499893797,
+        "y": 3.968002852966046
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.1370756062767473,
+        "y": 4.675463623395149
+      },
+      "prevControl": {
+        "x": 2.2125800743206763,
+        "y": 4.437138057612954
+      },
+      "nextControl": {
+        "x": 1.848259520940771,
+        "y": 5.587095196041264
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 0.8246381969157779,
+        "y": 5.982268188302426
+      },
+      "prevControl": {
+        "x": 1.588019081366563,
+        "y": 5.723495007132669
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Depot"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "",
+      "waypointRelativePos": 3.118464592984762,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "AutoIntake"
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 5.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 400.0,
+    "maxAngularAcceleration": 1500.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 180.0
+  },
+  "reversed": false,
+  "folder": "Rebuilt Paths",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 180.0
+  },
+  "useDefaultConstraints": true
+}
