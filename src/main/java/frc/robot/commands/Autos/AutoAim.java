@@ -44,7 +44,7 @@ public class AutoAim extends Command {
 
         double current =
             swerve.getPose().getRotation().getRadians();
-
+            
         double target =
             driveAssist.getAimAngle().getRadians();
 

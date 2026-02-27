@@ -27,6 +27,7 @@ import frc.robot.commands.Autos.AutoFireCommand;
 import frc.robot.commands.Autos.AutoRunIntake;
 import frc.robot.commands.Autos.AutoSpinUp;
 import frc.robot.vision.DriveAssistManager;
+import frc.robot.vision.DriveAssistManager.AimTarget;
 
 public class RobotContainer {
 
@@ -126,7 +127,7 @@ drivetrain.setDefaultCommand(
 
         double vx = -driverXbox.getLeftY() * MaxSpeed * speedScale;
         double vy = -driverXbox.getLeftX() * MaxSpeed * speedScale;
-        double rot = -driverXbox.getRightX() * MaxAngularRate * speedScale;
+        double rot = -driverXbox.getRightX() * MaxAngularRate * speedScale * 1.2;
 
         boolean robotOriented = driverXbox.leftBumper().getAsBoolean();
 
@@ -194,7 +195,17 @@ scoringXbox.b().onTrue(new IntakeRetract(intakeFlop));
         // ---------------- Shooting ----------------
         scoringXbox.leftBumper().whileTrue(armShoot);
         scoringXbox.rightBumper().whileTrue(fire);
+        scoringXbox.povLeft()
+    .onTrue(new InstantCommand(() ->
+        driveAssist.setTarget(AimTarget.PASS_LEFT)))
+    .onFalse(new InstantCommand(() ->
+        driveAssist.setTarget(AimTarget.HUB)));
 
+    scoringXbox.povRight()
+    .onTrue(new InstantCommand(() ->
+        driveAssist.setTarget(AimTarget.PASS_RIGHT)))
+    .onFalse(new InstantCommand(() ->
+        driveAssist.setTarget(AimTarget.HUB)));
         // ---------------- Driver utilities ----------------
         driverXbox.a().whileTrue(drivetrain.applyRequest(() -> brake));
         driverXbox.b().whileTrue(drivetrain.applyRequest(() ->

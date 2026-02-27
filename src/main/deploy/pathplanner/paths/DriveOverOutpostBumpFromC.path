@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 6.075124555160143,
-        "y": 2.049928825622776
+        "x": 6.085883748517201,
+        "y": 1.8777817319098462
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.999681698021857,
-        "y": 1.9981002541921786
+        "x": 5.010440891378915,
+        "y": 1.825953160479249
       },
       "isLocked": false,
       "linkedName": "CenterTrench"
     },
     {
       "anchor": {
-        "x": 1.6100593119810207,
-        "y": 2.049928825622776
+        "x": 2.8904033214709375,
+        "y": 1.8777817319098462
       },
       "prevControl": {
-        "x": 2.5948021691238785,
-        "y": 2.0240145399064637
+        "x": 3.8751461786137953,
+        "y": 1.851867446193534
       },
       "nextControl": null,
       "isLocked": false,
@@ -35,7 +35,7 @@
       "minWaypointRelativePos": 0.0,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
-        "maxVelocity": 2.5,
+        "maxVelocity": 3.0,
         "maxAcceleration": 5.0,
         "maxAngularVelocity": 400.0,
         "maxAngularAcceleration": 1500.0,
@@ -55,14 +55,14 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0,
-    "rotation": -133.78112476486882
+    "velocity": 3.0,
+    "rotation": -97.49585763972983
   },
   "reversed": false,
   "folder": "Rebuilt Paths",
   "idealStartingState": {
     "velocity": 4.0,
-    "rotation": -52.3057595333109
+    "rotation": -92.93567344642129
   },
   "useDefaultConstraints": false
 }

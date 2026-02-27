@@ -52,8 +52,8 @@
         "y": 7.146747503566334
       },
       "prevControl": {
-        "x": 6.503598533431593,
-        "y": 7.041359462990724
+        "x": 6.5035985334315916,
+        "y": 7.041359462990723
       },
       "nextControl": {
         "x": 6.957000610637391,
@@ -111,7 +111,7 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 1,
-      "rotationDegrees": -178.31531568210383
+      "rotationDegrees": -178.31531568210386
     },
     {
       "waypointRelativePos": 2,
@@ -149,7 +149,7 @@
       "minWaypointRelativePos": 0.4830307813733292,
       "maxWaypointRelativePos": 2.3962115232833368,
       "constraints": {
-        "maxVelocity": 2.0,
+        "maxVelocity": 2.5,
         "maxAcceleration": 5.0,
         "maxAngularVelocity": 400.0,
         "maxAngularAcceleration": 1500.0,

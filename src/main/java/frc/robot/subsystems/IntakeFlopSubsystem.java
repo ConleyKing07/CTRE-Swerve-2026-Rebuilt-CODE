@@ -10,6 +10,7 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class IntakeFlopSubsystem extends SubsystemBase {
@@ -19,7 +20,7 @@ public class IntakeFlopSubsystem extends SubsystemBase {
     private final SparkClosedLoopController armPID;
 
     private static final double STOW_POSITION = 0.0;
-    private static final double DEPLOY_POSITION = 14;
+    private static final double DEPLOY_POSITION = 16;
 
     private static final double POSITION_TOLERANCE = 5.0;
     private static final double STOW_HOLD_OUTPUT = -0.15;
@@ -35,13 +36,13 @@ public class IntakeFlopSubsystem extends SubsystemBase {
 
         SparkMaxConfig config = new SparkMaxConfig();
         config.idleMode(IdleMode.kBrake);
-        config.smartCurrentLimit(30);
+        config.smartCurrentLimit(35);
 
         config.closedLoop
-            .p(0.6)
+            .p(0.25)
             .i(0.0)
             .d(0.2)
-            .outputRange(-0.3, 0.3);
+            .outputRange(-0.4, 0.2);
 
         armMotor.configure(
             config,
@@ -102,8 +103,10 @@ public class IntakeFlopSubsystem extends SubsystemBase {
             movingToStow = false;
         }
 
+         SmartDashboard.putNumber("Intake position", armEncoder.getPosition());
+
         // Apply clamp hold ONLY after stow completed
-        if (clampActive) {
+        if (clampActive) 
             armMotor.set(STOW_HOLD_OUTPUT);
         }
     }

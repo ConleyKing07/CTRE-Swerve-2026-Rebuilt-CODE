@@ -17,6 +17,12 @@
           }
         },
         {
+          "type": "path",
+          "data": {
+            "pathName": "New Path"
+          }
+        },
+        {
           "type": "parallel",
           "data": {
             "commands": [
@@ -33,7 +39,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 3.5
+                        "waitTime": 4.0
                       }
                     },
                     {
