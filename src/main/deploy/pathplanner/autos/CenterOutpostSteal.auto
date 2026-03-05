@@ -5,40 +5,21 @@
     "data": {
       "commands": [
         {
-          "type": "parallel",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "TrenchToOutpost"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Deploy"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 2.5
+            "pathName": "CenterOutpostCollectpieces"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "OutpostToDepot"
+            "pathName": "DriveOverOutpostBumpFromC"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "DepotToShoot"
+            "pathName": "DriveoverBump-Shoot"
           }
         },
         {
@@ -58,7 +39,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 3.0
+                        "waitTime": 4.0
                       }
                     },
                     {

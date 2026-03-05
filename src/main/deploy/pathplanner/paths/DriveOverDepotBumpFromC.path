@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 6.251569186875892,
-        "y": 6.085777460770328
+        "x": 6.03208778173191,
+        "y": 5.944756820877817
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.176126329737605,
-        "y": 6.03394888933973
+        "x": 4.9563361994478266,
+        "y": 5.9965982445975765
       },
       "isLocked": false,
       "linkedName": "Depot trench c"
     },
     {
       "anchor": {
-        "x": 2.24485172004745,
-        "y": 6.085777460770328
+        "x": 1.9435943060498229,
+        "y": 5.804887307236061
       },
       "prevControl": {
-        "x": 3.2295945771903076,
-        "y": 6.059863175054016
+        "x": 2.92833736025342,
+        "y": 5.830794103561293
       },
       "nextControl": null,
       "isLocked": false,
@@ -35,7 +35,7 @@
       "minWaypointRelativePos": 0.0,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
-        "maxVelocity": 2.5,
+        "maxVelocity": 4.5,
         "maxAcceleration": 5.0,
         "maxAngularVelocity": 400.0,
         "maxAngularAcceleration": 1500.0,
@@ -55,14 +55,14 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0,
-    "rotation": 137.86240522611172
+    "velocity": 3.5,
+    "rotation": 97.5
   },
   "reversed": false,
   "folder": "Rebuilt Paths",
   "idealStartingState": {
     "velocity": 4.0,
-    "rotation": 50.19442890773485
+    "rotation": 92.936
   },
   "useDefaultConstraints": false
 }

@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.9328351126927648,
-        "y": 0.6297153024911032
+        "x": 1.9328338085930683,
+        "y": 0.6297039275053048
       },
       "isLocked": false,
       "linkedName": "TrenchStart"
@@ -112,12 +112,12 @@
     },
     {
       "anchor": {
-        "x": 6.085883748517201,
-        "y": 1.8777817319098462
+        "x": 6.0213285883748515,
+        "y": 1.9315776986951358
       },
       "prevControl": {
-        "x": 7.054211150652431,
-        "y": 1.7594306049822062
+        "x": 6.989655990510082,
+        "y": 1.8132265717674958
       },
       "nextControl": null,
       "isLocked": false,
@@ -156,7 +156,7 @@
       "minWaypointRelativePos": 2.955011838989748,
       "maxWaypointRelativePos": 5.4,
       "constraints": {
-        "maxVelocity": 1.25,
+        "maxVelocity": 2.0,
         "maxAcceleration": 2.0,
         "maxAngularVelocity": 400.0,
         "maxAngularAcceleration": 1500.0,
@@ -182,7 +182,7 @@
   "eventMarkers": [
     {
       "name": "Deploy",
-      "waypointRelativePos": 3.2391475927387536,
+      "waypointRelativePos": 2.6077348066298423,
       "endWaypointRelativePos": null,
       "command": {
         "type": "sequential",
@@ -215,7 +215,7 @@
   },
   "goalEndState": {
     "velocity": 4.0,
-    "rotation": -92.93567344642129
+    "rotation": -87.51044707800075
   },
   "reversed": false,
   "folder": "Rebuilt Paths",

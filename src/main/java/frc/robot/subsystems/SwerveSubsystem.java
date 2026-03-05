@@ -168,7 +168,7 @@ public class SwerveSubsystem extends TunerSwerveDrivetrain implements Subsystem 
                 this::getChassisSpeeds,
                 this::driveRobotRelative,
                 new PPHolonomicDriveController(
-                    new PIDConstants(3.2, 0.0, 0.0),
+                    new PIDConstants(3.2, 0.0, 0.2),
                     new PIDConstants(2.5, 0.0, 0.0)
                 ),
                 RobotConfig.fromGUISettings(),

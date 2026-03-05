@@ -46,7 +46,7 @@ public class DriveAssistManager {
 
     // ================= LEAD SETTINGS =================
     private static final boolean USE_LEAD = true;
-    private static final double LEAD_TIME = 0.5; // seconds
+    private static final double LEAD_TIME = 0.75; // seconds
 
     // ================= AIM SETTINGS =================
     private static final double AIM_TOLERANCE_DEG = 0.05;

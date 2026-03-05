@@ -83,7 +83,11 @@ public class RobotContainer {
         autoChooser.setDefaultOption("OutpostSideSteal", "OutpostSideSteal");
         autoChooser.addOption("DepotSideSteal", "DepotSideSteal");
         autoChooser.addOption("ShootPreloadPark", "ShootPreloadPark");
-        autoChooser.addOption("DumpOutpostCollectDepotShoot", "DumpOutpostCollectDepotShoot");
+        autoChooser.addOption("OutpostShoot", "OutpostShoot");
+        autoChooser.addOption("CenterDepotSteal", "CenterDepotSteal");
+        autoChooser.addOption("CenterOutpostSteal", "CenterOutpostSteal");
+
+
 
 
         Shuffleboard.getTab("Driver").add(autoChooser);
@@ -96,10 +100,10 @@ public class RobotContainer {
         NamedCommands.registerCommand("Deploy", new IntakeDeploy(intakeFlop));
         NamedCommands.registerCommand("Retract", new IntakeRetract(intakeFlop));
         NamedCommands.registerCommand("AutoIntake",
-          new AutoRunIntake(intake, 0.95, 5.0) // 2 seconds intake
+          new AutoRunIntake(intake, 1.0, 5.0) // 2 seconds intake
            );
         NamedCommands.registerCommand("AutoIntake2",
-          new AutoRunIntake(intake, 0.5, 2.0) // 2 seconds intake
+          new AutoRunIntake(intake, 1.0, 2.0) // 2 seconds intake
            );
 
         NamedCommands.registerCommand("AutoShoot",

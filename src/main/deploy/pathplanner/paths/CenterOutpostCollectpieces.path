@@ -3,157 +3,157 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.622,
-        "y": 7.664
+        "x": 3.622028469750891,
+        "y": 4.018861209964412
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.9321721715769213,
-        "y": 7.4783069460455165
+        "x": 1.9866310794780555,
+        "y": 3.663807829181494
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.471,
-        "y": 5.727
+        "x": 3.4713997627520765,
+        "y": 2.37270462633452
       },
       "prevControl": {
-        "x": 2.766915420639344,
-        "y": 5.854941159523148
+        "x": 2.750533807829182,
+        "y": 2.340427046263345
       },
       "nextControl": {
-        "x": 4.181367250416098,
-        "y": 5.597917198913753
+        "x": 4.19241223365063,
+        "y": 2.404988766822515
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 6.075,
-        "y": 5.87
+        "x": 6.075124555160143,
+        "y": 2.230057061340942
       },
       "prevControl": {
-        "x": 5.954553934329536,
-        "y": 5.650927534216401
+        "x": 5.954678303743965,
+        "y": 2.449129425001426
       },
       "nextControl": {
-        "x": 6.3168556998662915,
-        "y": 6.309897511293467
+        "x": 6.3170912930688745,
+        "y": 1.7899584731522347
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 6.678,
-        "y": 6.879
+        "x": 6.677639383155398,
+        "y": 1.2214709371292998
       },
       "prevControl": {
-        "x": 6.575336200346497,
-        "y": 6.651052321264932
+        "x": 6.574975995417826,
+        "y": 1.4494188013839246
       },
       "nextControl": {
-        "x": 6.8340489754733245,
-        "y": 7.225480471677302
+        "x": 6.833670709357754,
+        "y": 0.8750279807020309
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 7.818,
-        "y": 6.739
+        "x": 7.81811387900356,
+        "y": 1.361340450771056
       },
       "prevControl": {
-        "x": 7.793343542798125,
-        "y": 7.40854615906467
+        "x": 7.793449080537377,
+        "y": 0.69143101788159
       },
       "nextControl": {
-        "x": 7.875740270671256,
-        "y": 5.171062800638109
+        "x": 7.875831799753171,
+        "y": 2.928990784907925
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 7.818,
-        "y": 4.522
+        "x": 7.81811387900356,
+        "y": 3.5777342823250295
       },
       "prevControl": {
-        "x": 7.8351411508277184,
-        "y": 4.83052419831887
+        "x": 7.835234276330281,
+        "y": 3.269567130444018
       },
       "nextControl": {
-        "x": 7.8041317549937546,
-        "y": 4.272384952816449
+        "x": 7.804246374097931,
+        "y": 3.827349370626383
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 7.194,
-        "y": 5.48
+        "x": 7.194080664294188,
+        "y": 2.6201660735468555
       },
       "prevControl": {
-        "x": 7.561210880734751,
-        "y": 4.929182272371333
+        "x": 7.561243005968189,
+        "y": 3.170909586057846
       },
       "nextControl": {
-        "x": 7.055325196097148,
-        "y": 5.68801273701989
+        "x": 7.055405615237879,
+        "y": 2.412153499962396
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 6.03208778173191,
-        "y": 5.944756820877817
+        "x": 6.0213285883748515,
+        "y": 1.9315776986951358
       },
       "prevControl": {
-        "x": 6.280241297111358,
-        "y": 5.975085566397905
+        "x": 6.989655990510082,
+        "y": 1.8132265717674958
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Depot trench c"
+      "linkedName": "CenterTrench"
     }
   ],
   "rotationTargets": [
     {
       "waypointRelativePos": 1,
-      "rotationDegrees": -177.15
+      "rotationDegrees": 177.14780073945929
     },
     {
       "waypointRelativePos": 2,
-      "rotationDegrees": -177.4
+      "rotationDegrees": 177.3974377975002
     },
     {
       "waypointRelativePos": 3,
-      "rotationDegrees": -3.81
+      "rotationDegrees": 3.8140748342902655
     },
     {
       "waypointRelativePos": 4.0,
-      "rotationDegrees": -90.0
+      "rotationDegrees": 90.0
     },
     {
       "waypointRelativePos": 5.0,
-      "rotationDegrees": -90.0
+      "rotationDegrees": 90.0
     },
     {
       "waypointRelativePos": 6,
-      "rotationDegrees": 45.0
+      "rotationDegrees": -44.99999999999985
     }
   ],
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 2.3314917127071975,
+      "minWaypointRelativePos": 2.955011838989748,
       "maxWaypointRelativePos": 5.4,
       "constraints": {
         "maxVelocity": 2.0,
@@ -182,7 +182,7 @@
   "eventMarkers": [
     {
       "name": "Deploy",
-      "waypointRelativePos": 2.61,
+      "waypointRelativePos": 2.6077348066298423,
       "endWaypointRelativePos": null,
       "command": {
         "type": "sequential",
@@ -215,7 +215,7 @@
   },
   "goalEndState": {
     "velocity": 4.0,
-    "rotation": 92.936
+    "rotation": -87.51044707800075
   },
   "reversed": false,
   "folder": "Rebuilt Paths",
