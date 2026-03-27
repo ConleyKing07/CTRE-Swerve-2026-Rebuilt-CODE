@@ -32,10 +32,10 @@ public class DriveAssistManager {
 
     // Passing locations (example coordinates — replace with real ones)
     private static final Pose2d BLUE_PASS_LEFT =
-        new Pose2d(2.25, 6.5, new Rotation2d(0));
+        new Pose2d(2.00, 6.5, new Rotation2d(0));
 
     private static final Pose2d BLUE_PASS_RIGHT =
-        new Pose2d(2.25, 1.5, new Rotation2d(0));
+        new Pose2d(2.00, 1.5, new Rotation2d(0));
 
     private static final double FIELD_LENGTH = 16.54;
 
@@ -46,7 +46,7 @@ public class DriveAssistManager {
 
     // ================= LEAD SETTINGS =================
     private static final boolean USE_LEAD = true;
-    private static final double LEAD_TIME = 0.75; // seconds
+    private static final double LEAD_TIME = 0.85;//seconds
 
     // ================= AIM SETTINGS =================
     private static final double AIM_TOLERANCE_DEG = 0.05;
@@ -159,7 +159,7 @@ public class DriveAssistManager {
     }
 
     public boolean isAimedDR() {
-        return Math.abs(getAimErrorDeg()) <= 7.5;
+        return Math.abs(getAimErrorDeg()) <= 3.0;
     }
 
     // ==================================================

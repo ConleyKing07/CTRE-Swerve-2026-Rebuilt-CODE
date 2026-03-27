@@ -112,12 +112,12 @@
     },
     {
       "anchor": {
-        "x": 6.03208778173191,
-        "y": 5.944756820877817
+        "x": 6.107402135231317,
+        "y": 5.6650177935943065
       },
       "prevControl": {
-        "x": 6.280241297111358,
-        "y": 5.975085566397905
+        "x": 6.355555650610765,
+        "y": 5.695346539114394
       },
       "nextControl": null,
       "isLocked": false,
@@ -182,7 +182,7 @@
   "eventMarkers": [
     {
       "name": "Deploy",
-      "waypointRelativePos": 2.61,
+      "waypointRelativePos": 2.0,
       "endWaypointRelativePos": null,
       "command": {
         "type": "sequential",

@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.622028469750891,
-        "y": 0.43604982206405685
+        "x": 3.6543060498220648,
+        "y": 2.2
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.8399651159485444,
-        "y": 0.3809610477884089
+        "x": 1.8722426960197183,
+        "y": 2.144911225724352
       },
       "isLocked": false,
       "linkedName": "TrenchStart"
@@ -48,7 +48,7 @@
   "folder": "Rebuilt Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": -90.0
   },
   "useDefaultConstraints": false
 }

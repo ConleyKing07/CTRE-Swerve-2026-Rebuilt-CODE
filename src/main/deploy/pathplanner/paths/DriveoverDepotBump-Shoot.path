@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.9435943060498229,
-        "y": 5.804887307236061
+        "x": 1.2765243179122192,
+        "y": 5.6650177935943065
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.4859249127258503,
-        "y": 5.867508924610374
+        "x": 1.1012755305688122,
+        "y": 5.84330930358473
       },
       "isLocked": false,
       "linkedName": "Depot Shoot Point"
@@ -20,8 +20,8 @@
         "y": 5.923238434163701
       },
       "prevControl": {
-        "x": 2.1417061329968528,
-        "y": 5.708075236021132
+        "x": 1.7870924828191657,
+        "y": 5.987543008915887
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 134.99999999999997
+    "rotation": 147.52880770915152
   },
   "reversed": false,
   "folder": "Rebuilt Paths",
   "idealStartingState": {
-    "velocity": 4.5,
-    "rotation": 97.5
+    "velocity": 3.0,
+    "rotation": 102.68038349181988
   },
   "useDefaultConstraints": true
 }

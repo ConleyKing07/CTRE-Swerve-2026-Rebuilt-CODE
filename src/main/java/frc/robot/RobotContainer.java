@@ -22,10 +22,10 @@ import com.pathplanner.lib.commands.PathPlannerAuto;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
-import frc.robot.commands.Autos.AutoAim;
+import frc.robot.commands.Autos.AutoAimCommand;
 import frc.robot.commands.Autos.AutoFireCommand;
 import frc.robot.commands.Autos.AutoRunIntake;
-import frc.robot.commands.Autos.AutoSpinUp;
+import frc.robot.commands.Autos.JimmyCommand;
 import frc.robot.vision.DriveAssistManager;
 import frc.robot.vision.DriveAssistManager.AimTarget;
 
@@ -48,16 +48,7 @@ public class RobotContainer {
     private final CommandXboxController driverXbox = new CommandXboxController(0);
     private final CommandXboxController scoringXbox = new CommandXboxController(1);
 
-    // ---------------- Commands ----------------
-    private final ArmCommand armShoot = new ArmCommand(
-            drivetrain,
-            shooter,
-            preshooter,
-            driveAssist,
-            () -> driverXbox.getLeftY(),
-            () -> driverXbox.getLeftX()
-    );
-
+  
     private final FireCommand fire = new FireCommand(hopper);
 
     private final SendableChooser<String> autoChooser = new SendableChooser<>();
@@ -100,29 +91,29 @@ public class RobotContainer {
         NamedCommands.registerCommand("Deploy", new IntakeDeploy(intakeFlop));
         NamedCommands.registerCommand("Retract", new IntakeRetract(intakeFlop));
         NamedCommands.registerCommand("AutoIntake",
-          new AutoRunIntake(intake, 1.0, 5.0) // 2 seconds intake
+          new AutoRunIntake(intake, 1.0,10.0)
            );
         NamedCommands.registerCommand("AutoIntake2",
-          new AutoRunIntake(intake, 1.0, 2.0) // 2 seconds intake
+          new AutoRunIntake(intake, 1.0, 0.5)
            );
 
         NamedCommands.registerCommand("AutoShoot",
-          new ParallelCommandGroup(
-          new AutoAim(drivetrain, driveAssist),
-          new AutoSpinUp(shooter, preshooter, driveAssist,8.0),
-          new SequentialCommandGroup(
-          new WaitCommand(0.1),
-          new AutoFireCommand(hopper, 7.9))
-          )  
-          );
+    new ParallelCommandGroup(
+    new AutoAimCommand(drivetrain, driveAssist),
+    new ShooterControlCommand(shooter, preshooter, driveAssist),
+    new JimmyCommand(intakeFlop),
+    new SequentialCommandGroup(
+        new WaitCommand(0.5),
+        new AutoFireCommand(hopper, 7.9)
+    )
+)
+);
    
 
         
         // ---------------- Speed boost toggle ----------------
         driverXbox.rightBumper().whileTrue(new InstantCommand(() -> speedBoost = true))
                                 .onFalse(new InstantCommand(() -> speedBoost = false));
-        driverXbox.povRight().onTrue(new AutoAim(drivetrain, driveAssist));
-
         // ---------------- Default drive command ----------------
 drivetrain.setDefaultCommand(
     drivetrain.applyRequest(() -> {
@@ -197,7 +188,22 @@ scoringXbox.b().onTrue(new IntakeRetract(intakeFlop));
 
 
         // ---------------- Shooting ----------------
-        scoringXbox.leftBumper().whileTrue(armShoot);
+        scoringXbox.leftBumper().whileTrue(
+        new DriveControlCommand(
+            drivetrain,
+            driveAssist,
+            () -> driverXbox.getLeftY(),
+            () -> driverXbox.getLeftX()
+        )
+
+);
+        scoringXbox.leftBumper().whileTrue(
+  new ShooterControlCommand(
+            shooter,
+            preshooter,
+            driveAssist
+        )
+        );
         scoringXbox.rightBumper().whileTrue(fire);
         scoringXbox.povLeft()
     .onTrue(new InstantCommand(() ->

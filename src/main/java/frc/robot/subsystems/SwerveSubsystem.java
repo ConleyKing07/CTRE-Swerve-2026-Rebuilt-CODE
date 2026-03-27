@@ -6,6 +6,7 @@ import com.ctre.phoenix6.Utils;
 import com.ctre.phoenix6.swerve.*;
 
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.commands.PathfindingCommand;
 import com.pathplanner.lib.config.PIDConstants;
 import com.pathplanner.lib.config.RobotConfig;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
@@ -180,7 +181,9 @@ public class SwerveSubsystem extends TunerSwerveDrivetrain implements Subsystem 
         } catch (Exception e) {
             System.out.println("PathPlanner config failed!");
             e.printStackTrace();
+            
         }
+         PathfindingCommand.warmupCommand().schedule();
     }
 
     // ================= LIMELIGHT =================

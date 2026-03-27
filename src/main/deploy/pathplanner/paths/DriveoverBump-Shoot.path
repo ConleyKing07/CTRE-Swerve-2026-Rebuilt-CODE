@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.8360023724792414,
-        "y": 1.8455041518386714
+        "x": 1.6154389086595495,
+        "y": 1.8777817319098462
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.56205600686957,
-        "y": 1.7606228492633773
+        "x": 1.3709748175162961,
+        "y": 1.9301010222481434
       },
       "isLocked": false,
       "linkedName": "BumpShootpoint"
     },
     {
       "anchor": {
-        "x": 1.4917081850533813,
-        "y": 1.6195610913404517
+        "x": 2.1533985765124566,
+        "y": 2.1360023724792403
       },
       "prevControl": {
-        "x": 1.728393671791526,
-        "y": 1.7000594165871763
+        "x": 2.406865833794599,
+        "y": 1.98520360607864
       },
       "nextControl": null,
       "isLocked": false,
@@ -34,7 +34,7 @@
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 5.0,
-    "maxAcceleration": 3.0,
+    "maxAcceleration": 1.0,
     "maxAngularVelocity": 400.0,
     "maxAngularAcceleration": 1500.0,
     "nominalVoltage": 12.0,
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -133.09084756700346
+    "rotation": -154.22425888657997
   },
   "reversed": false,
   "folder": "Rebuilt Paths",
   "idealStartingState": {
-    "velocity": 4.5,
+    "velocity": 3.0,
     "rotation": -88.63607246839707
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

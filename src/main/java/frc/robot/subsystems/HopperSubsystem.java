@@ -22,7 +22,7 @@ public class HopperSubsystem extends SubsystemBase {
         final SparkMaxConfig config = new SparkMaxConfig();
         hopperMotor = new SparkMax(23, MotorType.kBrushless);
         config.inverted(true);
-        config.smartCurrentLimit(40);
+        config.smartCurrentLimit(50);
         hopperMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
 

@@ -81,15 +81,15 @@
     {
       "anchor": {
         "x": 7.818,
-        "y": 4.522
+        "y": 4.718208778173191
       },
       "prevControl": {
         "x": 7.8351411508277184,
-        "y": 4.83052419831887
+        "y": 5.026732976492061
       },
       "nextControl": {
         "x": 7.8041317549937546,
-        "y": 4.272384952816449
+        "y": 4.46859373098964
       },
       "isLocked": false,
       "linkedName": null
@@ -112,12 +112,12 @@
     },
     {
       "anchor": {
-        "x": 6.03208778173191,
-        "y": 5.944756820877817
+        "x": 6.107402135231317,
+        "y": 5.6650177935943065
       },
       "prevControl": {
-        "x": 6.280241297111358,
-        "y": 5.975085566397905
+        "x": 6.355555650610765,
+        "y": 5.695346539114394
       },
       "nextControl": null,
       "isLocked": false,
@@ -156,7 +156,7 @@
       "minWaypointRelativePos": 2.3314917127071975,
       "maxWaypointRelativePos": 5.4,
       "constraints": {
-        "maxVelocity": 2.0,
+        "maxVelocity": 1.75,
         "maxAcceleration": 2.0,
         "maxAngularVelocity": 400.0,
         "maxAngularAcceleration": 1500.0,
@@ -182,7 +182,7 @@
   "eventMarkers": [
     {
       "name": "Deploy",
-      "waypointRelativePos": 2.61,
+      "waypointRelativePos": 2.0,
       "endWaypointRelativePos": null,
       "command": {
         "type": "sequential",
@@ -214,7 +214,7 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 4.0,
+    "velocity": 4.5,
     "rotation": 92.936
   },
   "reversed": false,

@@ -33,7 +33,9 @@ public class ShooterSubsystem extends SubsystemBase {
 
         var cfg = new com.ctre.phoenix6.configs.TalonFXConfiguration();
         cfg.CurrentLimits.SupplyCurrentLimitEnable = true;
-        cfg.CurrentLimits.SupplyCurrentLimit = 30;
+        cfg.CurrentLimits.SupplyCurrentLimit = 85;
+        cfg.CurrentLimits.StatorCurrentLimitEnable = true;
+        cfg.CurrentLimits.StatorCurrentLimit = 75;
 
         cfg.Slot0.kP = 0.5;
         cfg.Slot0.kV = 0.12;
@@ -52,7 +54,7 @@ public class ShooterSubsystem extends SubsystemBase {
         // RPM table
         rpmTable.put(1.75, 2225.0);
         rpmTable.put(2.0, 2325.0);
-        rpmTable.put(2.5, 2525.0);
+        rpmTable.put(2.5, 2425.0);
         rpmTable.put(3.0, 2775.0);
         rpmTable.put(3.5, 3025.0);
         rpmTable.put(4.0, 3275.0);
