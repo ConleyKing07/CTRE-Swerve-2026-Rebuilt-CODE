@@ -75,8 +75,7 @@ public class RobotContainer {
         autoChooser.addOption("DepotSideSteal", "DepotSideSteal");
         autoChooser.addOption("ShootPreloadPark", "ShootPreloadPark");
         autoChooser.addOption("OutpostShoot", "OutpostShoot");
-        autoChooser.addOption("CenterDepotSteal", "CenterDepotSteal");
-        autoChooser.addOption("CenterOutpostSteal", "CenterOutpostSteal");
+        autoChooser.addOption("OutpostStealDepotShoot", "OutpostStealDepotShoot");
 
 
 
@@ -91,7 +90,10 @@ public class RobotContainer {
         NamedCommands.registerCommand("Deploy", new IntakeDeploy(intakeFlop));
         NamedCommands.registerCommand("Retract", new IntakeRetract(intakeFlop));
         NamedCommands.registerCommand("AutoIntake",
-          new AutoRunIntake(intake, 1.0,10.0)
+          new AutoRunIntake(intake, 1.0,4.0)
+           );
+            NamedCommands.registerCommand("AutoIntake8",
+          new AutoRunIntake(intake, 1.0,9.0)
            );
         NamedCommands.registerCommand("AutoIntake2",
           new AutoRunIntake(intake, 1.0, 0.5)
@@ -196,7 +198,13 @@ scoringXbox.b().onTrue(new IntakeRetract(intakeFlop));
             () -> driverXbox.getLeftX()
         )
 
+
 );
+
+       scoringXbox.x().whileTrue(
+        new JimmyCommand(intakeFlop));
+
+
         scoringXbox.leftBumper().whileTrue(
   new ShooterControlCommand(
             shooter,

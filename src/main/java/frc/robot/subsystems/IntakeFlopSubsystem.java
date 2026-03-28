@@ -31,7 +31,7 @@ public class IntakeFlopSubsystem extends SubsystemBase {
     // =========================
     private boolean jimmyActive = false;
     private double jimmyLow = 2.0;
-    private double jimmyHigh = 11.5;
+    private double jimmyHigh = 10.5;
     private double jimmyPeriod = 0.5;
     private Timer jimmyTimer = new Timer();
 

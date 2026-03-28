@@ -97,11 +97,11 @@
     {
       "anchor": {
         "x": 6.14505931198102,
-        "y": 1.8777817319098462
+        "y": 2.285
       },
       "prevControl": {
         "x": 7.113386714116251,
-        "y": 1.7594306049822062
+        "y": 2.16664887307236
       },
       "nextControl": null,
       "isLocked": false,
@@ -198,8 +198,8 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 4.0,
-    "rotation": -87.51044707800075
+    "velocity": 3.0,
+    "rotation": -90.0
   },
   "reversed": false,
   "folder": "Rebuilt Paths",

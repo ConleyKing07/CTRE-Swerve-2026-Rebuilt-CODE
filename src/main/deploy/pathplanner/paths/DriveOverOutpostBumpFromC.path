@@ -4,28 +4,28 @@
     {
       "anchor": {
         "x": 6.14505931198102,
-        "y": 1.8777817319098462
+        "y": 2.285
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.069616454842734,
-        "y": 1.8259531604792492
+        "x": 5.068368297907671,
+        "y": 2.285
       },
       "isLocked": false,
       "linkedName": "CenterTrench"
     },
     {
       "anchor": {
-        "x": 1.6154389086595495,
-        "y": 1.8777817319098462
+        "x": 1.7914285714285714,
+        "y": 2.25
       },
       "prevControl": {
-        "x": 2.600181765802406,
-        "y": 1.851867446193534
+        "x": 2.776171428571428,
+        "y": 2.224085714283688
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "BumpShootpoint"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
@@ -55,14 +55,14 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 3.5,
-    "rotation": -88.63607246839707
+    "velocity": 0.0,
+    "rotation": -90.0
   },
   "reversed": false,
   "folder": "Rebuilt Paths",
   "idealStartingState": {
     "velocity": 3.0,
-    "rotation": -87.51044707800075
+    "rotation": -90.0
   },
   "useDefaultConstraints": false
 }
