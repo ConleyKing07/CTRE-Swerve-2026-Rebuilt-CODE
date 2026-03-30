@@ -7,19 +7,31 @@
         {
           "type": "path",
           "data": {
-            "pathName": "DepotTrenchStart-CollectPieces"
+            "pathName": "OutpostTrenchStart-CollectPieces"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "DriveOverDepotBumpFromC"
+            "pathName": "Copy of DriveOverOutpostBumpFromC"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "DriveoverDepotBump-Shoot"
+            "pathName": "New New New New New New Path"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 2.5
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "New New Path"
           }
         },
         {

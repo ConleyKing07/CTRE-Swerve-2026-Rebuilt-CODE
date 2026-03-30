@@ -76,6 +76,9 @@ public class RobotContainer {
         autoChooser.addOption("ShootPreloadPark", "ShootPreloadPark");
         autoChooser.addOption("OutpostShoot", "OutpostShoot");
         autoChooser.addOption("OutpostStealDepotShoot", "OutpostStealDepotShoot");
+        autoChooser.addOption("OutpostStealOutpost", "OutpostStealOutpost");
+        autoChooser.addOption("DepotStealDepot", "DepotStealDepot");
+
 
 
 
@@ -96,7 +99,7 @@ public class RobotContainer {
           new AutoRunIntake(intake, 1.0,9.0)
            );
         NamedCommands.registerCommand("AutoIntake2",
-          new AutoRunIntake(intake, 1.0, 0.5)
+          new AutoRunIntake(intake, 0.2, 2.0)
            );
 
         NamedCommands.registerCommand("AutoShoot",

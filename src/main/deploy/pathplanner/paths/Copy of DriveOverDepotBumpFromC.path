@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.791,
+        "x": 6.119,
         "y": 5.8193
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.6415582665830704,
-        "y": 5.618882514951057
+        "x": 5.042,
+        "y": 5.8193
       },
       "isLocked": false,
-      "linkedName": "Depot Shoot Point"
+      "linkedName": "Depot trench c"
     },
     {
       "anchor": {
@@ -20,34 +20,48 @@
         "y": 5.8193
       },
       "prevControl": {
-        "x": 1.9271386331122322,
-        "y": 6.0289813596253445
+        "x": 2.7760837755734618,
+        "y": 5.8193
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Depot Turn"
+      "linkedName": "Depot Shoot Point"
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [],
+  "constraintZones": [
+    {
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 0.0,
+      "maxWaypointRelativePos": 1.0,
+      "constraints": {
+        "maxVelocity": 3.0,
+        "maxAcceleration": 6.0,
+        "maxAngularVelocity": 400.0,
+        "maxAngularAcceleration": 1500.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    }
+  ],
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 5.0,
-    "maxAcceleration": 3.0,
+    "maxAcceleration": 2.0,
     "maxAngularVelocity": 400.0,
     "maxAngularAcceleration": 1500.0,
     "nominalVoltage": 12.0,
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0,
-    "rotation": 145.0
+    "velocity": 3.5,
+    "rotation": 90.0
   },
   "reversed": false,
   "folder": "Rebuilt Paths",
   "idealStartingState": {
-    "velocity": 0.0,
+    "velocity": 3.0,
     "rotation": 90.0
   },
   "useDefaultConstraints": false

@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.7914285714285714,
-        "y": 2.25
+        "x": 0.45015226452872314,
+        "y": 6.936041740585731
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.5461557200022555,
-        "y": 2.2983862413626475
+        "x": 0.7251878354203931,
+        "y": 6.947459749552772
       },
       "isLocked": false,
-      "linkedName": "BumpShootpoint"
+      "linkedName": "Depot"
     },
     {
       "anchor": {
-        "x": 1.7914285714285714,
-        "y": 2.25
+        "x": 1.1470483005366723,
+        "y": 6.936041740585731
       },
       "prevControl": {
-        "x": 2.036607848947391,
-        "y": 2.2011418187470144
+        "x": 0.8549910554561713,
+        "y": 6.898783542039356
       },
       "nextControl": null,
       "isLocked": false,
@@ -34,7 +34,7 @@
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 5.0,
-    "maxAcceleration": 1.0,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 400.0,
     "maxAngularAcceleration": 1500.0,
     "nominalVoltage": 12.0,
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -147.66131798335425
+    "rotation": 140.0
   },
   "reversed": false,
   "folder": "Rebuilt Paths",
   "idealStartingState": {
-    "velocity": 0.0,
-    "rotation": -90.0
+    "velocity": 0,
+    "rotation": 90.0
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 0.988085714285714,
-        "y": 1.1196428571428567
+        "x": 0.8457180790687776,
+        "y": 1.4764352609038949
       },
       "isLocked": false,
       "linkedName": "OutpostDump"
     },
     {
       "anchor": {
-        "x": 0.9621714285714285,
-        "y": 1.5990571428571423
+        "x": 0.8353973902728358,
+        "y": 1.495724508050089
       },
       "prevControl": {
-        "x": 1.0164040430260923,
-        "y": 1.355010377811154
+        "x": 0.831261384631315,
+        "y": 0.5846052531701057
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -144.0
+    "rotation": -146.0
   },
   "reversed": false,
   "folder": "Rebuilt Paths",
