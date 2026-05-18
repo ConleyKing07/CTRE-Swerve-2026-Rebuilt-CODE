@@ -51,7 +51,7 @@
       ]
     }
   },
-  "resetOdom": true,
+  "resetOdom": false,
   "folder": "Rebuilt Autos",
   "choreoAuto": false
 }

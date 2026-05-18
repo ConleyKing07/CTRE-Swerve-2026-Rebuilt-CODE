@@ -7,7 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "CollectLongPieces"
+            "pathName": "New Path"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "CollectLongPiecesOutpost"
           }
         },
         {
@@ -39,7 +45,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 10.0
+                        "waitTime": 8.0
                       }
                     },
                     {
@@ -57,7 +63,7 @@
       ]
     }
   },
-  "resetOdom": true,
+  "resetOdom": false,
   "folder": "Rebuilt Autos",
   "choreoAuto": false
 }

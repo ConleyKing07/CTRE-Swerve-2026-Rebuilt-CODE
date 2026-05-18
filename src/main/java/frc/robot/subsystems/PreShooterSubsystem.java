@@ -29,7 +29,7 @@ public class PreShooterSubsystem extends SubsystemBase {
 
  var cfg = new com.ctre.phoenix6.configs.TalonFXConfiguration();
         cfg.CurrentLimits.SupplyCurrentLimitEnable = true;
-        cfg.CurrentLimits.SupplyCurrentLimit = 85;
+        cfg.CurrentLimits.SupplyCurrentLimit = 90;
         cfg.CurrentLimits.StatorCurrentLimitEnable = true;
         cfg.CurrentLimits.StatorCurrentLimit = 70;
 

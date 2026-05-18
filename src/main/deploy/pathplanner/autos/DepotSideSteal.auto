@@ -7,6 +7,18 @@
         {
           "type": "path",
           "data": {
+            "pathName": "Copy of New Path"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "New New New New Path"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
             "pathName": "DepotTrenchStart-CollectPieces"
           }
         },
@@ -57,7 +69,7 @@
       ]
     }
   },
-  "resetOdom": true,
+  "resetOdom": false,
   "folder": "Rebuilt Autos",
   "choreoAuto": false
 }

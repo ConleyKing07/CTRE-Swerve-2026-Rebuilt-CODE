@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.7914285714285714,
-        "y": 2.25
+        "x": 0.4588256227758012,
+        "y": 0.6512336892052202
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.2981382441241753,
-        "y": 1.4341218289713131
+        "x": 0.6462237102540755,
+        "y": 1.405174459588213
       },
       "isLocked": false,
-      "linkedName": "BumpShootpoint"
+      "linkedName": "OutpostDump"
     },
     {
       "anchor": {
-        "x": 0.8353973902728358,
-        "y": 0.6404744958481603
+        "x": 1.3579785330948118,
+        "y": 1.5444007155635062
       },
       "prevControl": {
-        "x": 0.7507753413256004,
-        "y": 1.0375161409455913
+        "x": 0.9943928967289142,
+        "y": 1.3067295329478874
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "OutpostDump"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": -142.76516601842533
   },
   "reversed": false,
   "folder": "Rebuilt Paths",
   "idealStartingState": {
-    "velocity": 3.5,
-    "rotation": -90.0
+    "velocity": 0,
+    "rotation": 180.0
   },
   "useDefaultConstraints": true
 }

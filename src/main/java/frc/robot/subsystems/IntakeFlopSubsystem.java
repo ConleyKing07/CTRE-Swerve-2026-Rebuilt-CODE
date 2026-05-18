@@ -30,9 +30,9 @@ public class IntakeFlopSubsystem extends SubsystemBase {
     // TIMED JIMMY CONFIG
     // =========================
     private boolean jimmyActive = false;
-    private double jimmyLow = 2.0;
-    private double jimmyHigh = 10.5;
-    private double jimmyPeriod = 0.5;
+    private double jimmyLow = 5.0;
+    private double jimmyHigh = 10.0;
+    private double jimmyPeriod = 0.75;
     private Timer jimmyTimer = new Timer();
 
     private boolean clampActive = false;
@@ -46,13 +46,13 @@ public class IntakeFlopSubsystem extends SubsystemBase {
 
         SparkMaxConfig config = new SparkMaxConfig();
         config.idleMode(IdleMode.kBrake);
-        config.smartCurrentLimit(40);
+        config.smartCurrentLimit(50);
 
         config.closedLoop
             .p(0.15)
             .i(0.0)
-            .d(0.55)
-            .outputRange(-0.325, 0.2);
+            .d(0.6)
+            .outputRange(-0.3, 0.2);
 
         armMotor.configure(
             config,

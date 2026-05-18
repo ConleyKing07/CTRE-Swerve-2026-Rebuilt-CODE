@@ -7,7 +7,31 @@
         {
           "type": "path",
           "data": {
-            "pathName": "New Path"
+            "pathName": "Copy of New Path"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "New New New New Path"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "DepotLoop"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "DriveOverDepotBumpFromC"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "DriveoverDepotBump-Shoot"
           }
         },
         {
@@ -27,13 +51,13 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 5.0
+                        "waitTime": 8.0
                       }
                     },
                     {
-                      "type": "path",
+                      "type": "named",
                       "data": {
-                        "pathName": "New New New Path"
+                        "name": "AutoIntake2"
                       }
                     }
                   ]
@@ -45,7 +69,7 @@
       ]
     }
   },
-  "resetOdom": true,
+  "resetOdom": false,
   "folder": "Rebuilt Autos",
   "choreoAuto": false
 }

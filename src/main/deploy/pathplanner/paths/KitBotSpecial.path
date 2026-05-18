@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.8353973902728358,
-        "y": 0.6404744958481603
+        "x": 3.5924714285714288,
+        "y": 4.034999999999999
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.0227954777511101,
-        "y": 1.394415266231153
+        "x": 2.59247142857142,
+        "y": 4.034999999999999
       },
       "isLocked": false,
-      "linkedName": "OutpostDump"
+      "linkedName": "6"
     },
     {
       "anchor": {
-        "x": 1.3579785330948118,
-        "y": 1.5444007155635062
+        "x": 2.3524436536180313,
+        "y": 4.034999999999999
       },
       "prevControl": {
-        "x": 0.9943928967289142,
-        "y": 1.3067295329478874
+        "x": 3.3524436536180313,
+        "y": 4.034999999999999
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "5"
     }
   ],
   "rotationTargets": [],
@@ -42,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -142.76516601842533
+    "rotation": 180.0
   },
   "reversed": false,
   "folder": "Rebuilt Paths",

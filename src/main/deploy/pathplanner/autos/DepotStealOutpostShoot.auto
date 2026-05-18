@@ -7,25 +7,25 @@
         {
           "type": "path",
           "data": {
-            "pathName": "DepotTrenchStart-CollectPieces"
+            "pathName": "Copy of New Path"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Copy of DriveOverDepotBumpFromC"
+            "pathName": "CollectLongPiecesDepot"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "New New New New Path"
+            "pathName": "DriveOverOutpostBumpFromC"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "New New New New New Path"
+            "pathName": "DriveoverBump-Shoot"
           }
         },
         {
@@ -63,7 +63,7 @@
       ]
     }
   },
-  "resetOdom": true,
+  "resetOdom": false,
   "folder": "Rebuilt Autos",
   "choreoAuto": false
 }

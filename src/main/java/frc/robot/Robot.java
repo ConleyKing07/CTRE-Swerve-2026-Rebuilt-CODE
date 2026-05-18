@@ -10,78 +10,63 @@ import org.opencv.core.*;
 
 public class Robot extends TimedRobot {
 
-  private Command m_autonomousCommand;
-  private final RobotContainer m_robotContainer;
+    private Command m_autonomousCommand;
+    private final RobotContainer m_robotContainer;
 
-  public Robot() {
-    m_robotContainer = new RobotContainer();
+    public Robot() {
+        m_robotContainer = new RobotContainer();
+        startUsbCamera();
+    }
 
-    startUsbCamera();
-  }
+    // ================= USB CAMERA =================
+    private void startUsbCamera() {
+        new Thread(() -> {
+            UsbCamera camera = CameraServer.startAutomaticCapture(0);
+            camera.setResolution(384, 216);
+            camera.setFPS(20);
 
-  // ================= USB CAMERA SETUP =================
-  private void startUsbCamera() {
+            CvSink cvSink = CameraServer.getVideo();
+            CvSource outputStream = CameraServer.putVideo("FlippedCam", 192, 108);
+            Mat mat = new Mat();
 
-    new Thread(() -> {
+            while (!Thread.interrupted()) {
+                if (cvSink.grabFrame(mat) == 0) {
+                    outputStream.notifyError(cvSink.getError());
+                    continue;
+                }
+                org.opencv.core.Core.flip(mat, mat, -1);
+                outputStream.putFrame(mat);
+            }
+        }).start();
+    }
 
-      // Start automatic capture (USB cam 0)
-      UsbCamera camera = CameraServer.startAutomaticCapture(0);
+    @Override
+    public void robotPeriodic() {
+        CommandScheduler.getInstance().run();
+    }
 
-      // Set max resolution (adjust if camera supports higher)
-      camera.setResolution(384, 216);
-      camera.setFPS(20);
+    @Override
+    public void disabledPeriodic() {
+        m_robotContainer.updateAutoPose(); // ensures alliance-aware starting pose
+    }
 
-      // Get video from camera
-      CvSink cvSink = CameraServer.getVideo();
-      CvSource outputStream =
-          CameraServer.putVideo("FlippedCam", 192, 108);
-
-      Mat mat = new Mat();
-
-      while (!Thread.interrupted()) {
-
-        if (cvSink.grabFrame(mat) == 0) {
-          outputStream.notifyError(cvSink.getError());
-          continue;
+    @Override
+    public void autonomousInit() {
+        m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+        if (m_autonomousCommand != null) {
+            m_autonomousCommand.schedule();
         }
-
-        // Flip image 180° (flip both X and Y)
-        Core.flip(mat, mat, -1);
-
-        outputStream.putFrame(mat);
-      }
-
-    }).start();
-  }
-
-  // ================= ROBOT LOOP =================
-
-  @Override
-  public void robotPeriodic() {
-    CommandScheduler.getInstance().run();
-  }
-
-  @Override
-  public void disabledInit() {}
-
-  @Override
-  public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
     }
-  }
 
-  @Override
-  public void teleopInit() {
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
+    @Override
+    public void teleopInit() {
+        if (m_autonomousCommand != null) {
+            m_autonomousCommand.cancel();
+        }
     }
-  }
 
-  @Override
-  public void testInit() {
-    CommandScheduler.getInstance().cancelAll();
-  }
+    @Override
+    public void testInit() {
+        CommandScheduler.getInstance().cancelAll();
+    }
 }

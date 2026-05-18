@@ -2,10 +2,15 @@ package frc.robot;
 
 import static edu.wpi.first.units.Units.*;
 
+import java.util.Optional;
+
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -51,7 +56,7 @@ public class RobotContainer {
   
     private final FireCommand fire = new FireCommand(hopper);
 
-    private final SendableChooser<String> autoChooser = new SendableChooser<>();
+    private final SendableChooser<PathPlannerAuto> autoChooser = new SendableChooser<>();
 
     // ---------------- Drive requests ----------------
     private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
@@ -71,14 +76,23 @@ public class RobotContainer {
     public RobotContainer() {
         configureBindings();
 
-        autoChooser.setDefaultOption("OutpostSideSteal", "OutpostSideSteal");
-        autoChooser.addOption("DepotSideSteal", "DepotSideSteal");
-        autoChooser.addOption("ShootPreloadPark", "ShootPreloadPark");
-        autoChooser.addOption("OutpostShoot", "OutpostShoot");
-        autoChooser.addOption("OutpostStealDepotShoot", "OutpostStealDepotShoot");
-        autoChooser.addOption("OutpostStealOutpost", "OutpostStealOutpost");
-        autoChooser.addOption("DepotStealDepot", "DepotStealDepot");
+       PathPlannerAuto outpostSideSteal = new PathPlannerAuto("OutpostSideSteal");
+       PathPlannerAuto depotSideSteal = new PathPlannerAuto("DepotSideSteal");
+       PathPlannerAuto depotSideLoop = new PathPlannerAuto("DepotSideLoop");
+       PathPlannerAuto outpostSideLoop = new PathPlannerAuto("OutpostSideLoop");
+       PathPlannerAuto kitBotSpecial = new PathPlannerAuto("KitBotSpecial");
+       PathPlannerAuto outpostShoot = new PathPlannerAuto("OutpostShoot");
+       PathPlannerAuto outpostStealDepotShoot = new PathPlannerAuto("OutpostStealDepotShoot");
+       PathPlannerAuto outpostStealOutpost = new PathPlannerAuto("OutpostStealOutpost");
 
+       autoChooser.setDefaultOption("OutpostSideSteal", outpostSideSteal);
+       autoChooser.addOption("DepotSideSteal", depotSideSteal);
+       autoChooser.addOption("DepotSideLoop", depotSideLoop);
+       autoChooser.addOption("OutpostSideLoop", outpostSideLoop);
+       autoChooser.addOption("KitBotSpecial", kitBotSpecial);
+       autoChooser.addOption("OutpostShoot", outpostShoot);
+       autoChooser.addOption("OutpostStealDepotShoot", outpostStealDepotShoot);
+       autoChooser.addOption("OutpostStealOutpost", outpostStealOutpost);
 
 
 
@@ -93,13 +107,13 @@ public class RobotContainer {
         NamedCommands.registerCommand("Deploy", new IntakeDeploy(intakeFlop));
         NamedCommands.registerCommand("Retract", new IntakeRetract(intakeFlop));
         NamedCommands.registerCommand("AutoIntake",
-          new AutoRunIntake(intake, 1.0,4.0)
+          new AutoRunIntake(intake, 1.0,6.5)
            );
             NamedCommands.registerCommand("AutoIntake8",
-          new AutoRunIntake(intake, 1.0,9.0)
+          new AutoRunIntake(intake, 1.0,9.5)
            );
         NamedCommands.registerCommand("AutoIntake2",
-          new AutoRunIntake(intake, 0.2, 2.0)
+          new AutoRunIntake(intake, 0.5, 3.0)
            );
 
         NamedCommands.registerCommand("AutoShoot",
@@ -109,7 +123,7 @@ public class RobotContainer {
     new JimmyCommand(intakeFlop),
     new SequentialCommandGroup(
         new WaitCommand(0.5),
-        new AutoFireCommand(hopper, 7.9)
+        new AutoFireCommand(hopper, 15.0)
     )
 )
 );
@@ -239,8 +253,37 @@ scoringXbox.b().onTrue(new IntakeRetract(intakeFlop));
     
     }
 
+    public Pose2d getSelectedAutoStartPose() {
+    PathPlannerAuto auto = autoChooser.getSelected();
+    if (auto == null) return null;
+
+    Pose2d pose = auto.getStartingPose();
+
+    // unwrap optional alliance safely
+    Optional<Alliance> allianceOpt = DriverStation.getAlliance();
+    if (allianceOpt.isPresent() && allianceOpt.get() == Alliance.Red) {
+        // Mirror field for red alliance
+        pose = new Pose2d(
+            16.5410 - pose.getX(),  // field length in meters
+            8.0693 - pose.getY(),   // field width in meters
+            pose.getRotation().plus(new Rotation2d(Math.PI))
+        );
+    }
+
+    return pose;
+}
+
+public void updateAutoPose() {
+    Pose2d pose = getSelectedAutoStartPose();
+    if (pose != null) {
+        drivetrain.resetPose(pose);
+    }
+}
+
+
+
     // ---------------- Autonomous ----------------
     public Command getAutonomousCommand() {
-        return new PathPlannerAuto(autoChooser.getSelected());
+        return autoChooser.getSelected();
     }
 }

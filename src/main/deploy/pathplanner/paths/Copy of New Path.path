@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.45015226452872314,
-        "y": 6.936041740585731
+        "x": 3.5467141162514837,
+        "y": 5.6112218268090155
       },
       "prevControl": null,
       "nextControl": {
-        "x": 0.7251878354203931,
-        "y": 6.947459749552772
+        "x": 3.8479715639361713,
+        "y": 5.6112218268090155
       },
       "isLocked": false,
-      "linkedName": "Depot"
+      "linkedName": "Depotbump"
     },
     {
       "anchor": {
-        "x": 1.1470483005366723,
-        "y": 6.936041740585731
+        "x": 2.7074970344009497,
+        "y": 5.6112218268090155
       },
       "prevControl": {
-        "x": 0.8549910554561713,
-        "y": 6.898783542039356
+        "x": 2.9574970344009497,
+        "y": 5.6112218268090155
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "11"
     }
   ],
   "rotationTargets": [],
@@ -41,8 +41,8 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0,
-    "rotation": 140.0
+    "velocity": 0.0,
+    "rotation": 90.0
   },
   "reversed": false,
   "folder": "Rebuilt Paths",

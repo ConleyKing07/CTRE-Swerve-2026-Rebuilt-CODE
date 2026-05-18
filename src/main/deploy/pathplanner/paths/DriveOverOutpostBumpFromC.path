@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 6.14505931198102,
-        "y": 2.285
+        "x": 6.225753262158957,
+        "y": 2.1144839857651245
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.068368297907671,
-        "y": 2.285
+        "x": 5.149062248085608,
+        "y": 2.1144839857651245
       },
       "isLocked": false,
       "linkedName": "CenterTrench"
     },
     {
       "anchor": {
-        "x": 1.7914285714285714,
-        "y": 2.25
+        "x": 1.4809489916963232,
+        "y": 2.1144839857651245
       },
       "prevControl": {
-        "x": 2.776171428571428,
-        "y": 2.224085714283688
+        "x": 2.46569184883918,
+        "y": 2.0885697000488124
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "BumpShootpoint"
     }
   ],
   "rotationTargets": [],
@@ -35,7 +35,7 @@
       "minWaypointRelativePos": 0.0,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
-        "maxVelocity": 3.0,
+        "maxVelocity": 4.0,
         "maxAcceleration": 6.0,
         "maxAngularVelocity": 400.0,
         "maxAngularAcceleration": 1500.0,
